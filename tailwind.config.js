@@ -8,6 +8,7 @@ module.exports = {
       },
       maxWidth: {
         78.75: '19.6875rem', // 315px
+        193.25: '48.3125rem', // 773px
       },
       gap: {
         15: '3.75rem', // 60px

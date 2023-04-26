@@ -9,7 +9,7 @@ export const SearchInput: FC = () => {
     <Input
       icon={<SearchIcon />}
       radius="md"
-      styles={{ input: { height:'48px' } }}
+      styles={{ input: { height: '48px' } }}
       placeholder="Введите название вакансии"
       rightSection={
         <Button radius="md" className="bg-blue-main-500">
