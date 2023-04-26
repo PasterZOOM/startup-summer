@@ -1,13 +1,17 @@
-import { Inter } from 'next/font/google'
+import { useEffect } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { NextPageWithLayout } from '@/pages/_app'
-import { MainLayout } from '@/pages/layouts/MainLayout'
-
-const inter = Inter({ subsets: ['latin'] })
 
 const Home: NextPageWithLayout = () => {
-  return <main className={inter.className}>Hello world</main>
+  const { push } = useRouter()
+
+  useEffect(() => {
+    push('/vacancies').then()
+  })
+
+  return null
 }
 
-Home.getLayout = MainLayout
 export default Home
