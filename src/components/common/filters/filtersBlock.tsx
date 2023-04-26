@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import { Button, Select } from '@mantine/core'
 
-import { ClearFiltersButton } from '@/components/common/filters/clearFiltersButton'
 import { FilterWrapper } from '@/components/common/filters/filterWrapper'
+import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersButton'
 import { InputNumber } from '@/components/common/ui/inputs/inputNumber'
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
 
