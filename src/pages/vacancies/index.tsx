@@ -2,6 +2,7 @@ import { Inter } from 'next/font/google'
 
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
+import { NotFound } from '@/components/common/ui/notFound'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
 import { VacancyHeader } from '@/components/common/vacancy/vacancyHeader'
 import { VacancyInfo } from '@/components/common/vacancy/vacancyInfo'
@@ -18,6 +19,7 @@ const Vacancies: NextPageWithLayout = () => {
       <VacancyCard />
       <VacancyHeader />
       <VacancyInfo />
+      <NotFound />
     </main>
   )
 }
