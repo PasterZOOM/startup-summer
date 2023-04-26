@@ -22,7 +22,9 @@ const Header: FC = () => {
 
   return (
     <div className="flex items-center justify-around bg-white py-6">
-      <Image src={logo} alt="logo" width={141} height={36} />
+      <Link href={links[0].href}>
+        <Image src={logo} alt="logo" width={141} height={36} />
+      </Link>
       <nav className="flex justify-between gap-15">
         {links.map(link => (
           <Link
