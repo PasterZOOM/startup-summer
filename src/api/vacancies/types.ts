@@ -4,7 +4,7 @@ export type VacancyType = {
   firm_name: string
   town: { title: string }
   catalogues: { title: string }[]
-  place_of_work: { title: string }
+  type_of_work: { title: string }
   payment_from: number
   payment_to: number
   currency: string
