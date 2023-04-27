@@ -6,12 +6,16 @@ import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { NotFound } from '@/components/common/ui/notFound'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
+import { useGetAccessToken } from '@/hooks/query/useGetAccessToken'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const inter = Inter({ subsets: ['latin'] })
 const data: string[] | undefined = []
+
 const Vacancies: NextPageWithLayout = () => {
+  useGetAccessToken()
+
   if (!data) return <NotFound />
 
   return (
