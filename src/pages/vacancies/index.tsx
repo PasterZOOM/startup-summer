@@ -2,6 +2,8 @@ import { Pagination } from '@mantine/core'
 import { GetServerSideProps } from 'next'
 import { Inter } from 'next/font/google'
 
+import { catalogsApi } from '@/api/catalogs/catalogsApi'
+import { CatalogType } from '@/api/catalogs/types'
 import { VacanciesResponseType } from '@/api/vacancies/types'
 import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
@@ -11,19 +13,21 @@ import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
 import { useGetAccessToken } from '@/hooks/query/useGetAccessToken'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
+import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
 import { useChangeParams } from '@/hooks/useChangeParams'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
-type PropsType = { vacancies: VacanciesResponseType }
+type PropsType = { vacancies: VacanciesResponseType; catalogs: CatalogType[] }
 
-const Vacancies: NextPageWithLayout<PropsType> = ({ vacancies }: PropsType) => {
+const Vacancies: NextPageWithLayout<PropsType> = ({ vacancies, catalogs }: PropsType) => {
   useChangeParams()
   useGetAccessToken()
 
-  const { data } = useGetAllVacancies({ initialData: vacancies, enabled: false })
+  useGetCatalogs({ initialData: catalogs })
+  const { data } = useGetAllVacancies({ initialData: vacancies })
 
   if (!data?.objects.length) return <NotFound />
 
@@ -52,6 +56,7 @@ export default Vacancies
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const vacancies = await vacanciesAPI.getVacancies(query)
+  const catalogs = await catalogsApi.getCatalogs()
 
-  return { props: { vacancies } }
+  return { props: { vacancies, catalogs } }
 }

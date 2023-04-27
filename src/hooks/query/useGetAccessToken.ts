@@ -12,6 +12,9 @@ export const useGetAccessToken: UseQueryHook<AuthByPasswordResponseType> = optio
   return useQuery({
     queryKey: [QUERY_KEY.GET_ACCESS_TOKEN],
     queryFn: authAPI.byPassword,
+    retry: false,
+    staleTime: Infinity,
+    refetchOnMount: false,
     onSuccess: res => {
       setAccessToken(res)
     },

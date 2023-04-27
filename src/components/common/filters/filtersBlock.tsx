@@ -8,6 +8,7 @@ import { InputNumber } from '@/components/common/ui/inputs/inputNumber'
 import { Paper } from '@/components/common/ui/wrappers/paper'
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
+import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
 import {
   selectCatalogues,
   selectPaymentFrom,
@@ -16,7 +17,8 @@ import {
 } from '@/store/useParamsStore'
 
 export const FiltersBlock: FC = () => {
-  const { refetch } = useGetAllVacancies({ enabled: false })
+  const { refetch } = useGetAllVacancies()
+  const { data: catalogs } = useGetCatalogs()
 
   const [catalogues, setCatalogues] = useParamsStore(selectCatalogues)
   const [paymentFrom, setPaymentFrom] = useParamsStore(selectPaymentFrom)
@@ -34,11 +36,17 @@ export const FiltersBlock: FC = () => {
           <Select
             placeholder="Выберете отрасль"
             rightSection={<SelectArrayIcon />}
-            rightSectionWidth={48}
+            rightSectionWidth={36}
             radius="md"
             size="md"
-            styles={{ rightSection: { pointerEvents: 'none' } }}
-            data={['React', 'Angular', 'Svelte', 'Vue']}
+            searchable
+            styles={{
+              rightSection: { pointerEvents: 'none', paddingRight: '12px' },
+              item: { padding: '5px 0 5px 5px' },
+            }}
+            data={
+              catalogs?.map(el => ({ value: el.key.toString(), label: el.title_trimmed })) ?? []
+            }
             value={catalogues}
             onChange={value => setCatalogues(value ?? undefined)}
           />

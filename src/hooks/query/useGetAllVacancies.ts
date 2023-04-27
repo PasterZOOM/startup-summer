@@ -6,16 +6,13 @@ import { QUERY_KEY } from '@/enums/queryKeys'
 import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
 import { UseQueryHook } from '@/types/useQueryType'
 
-export const useGetAllVacancies: UseQueryHook<
-  VacanciesResponseType,
-  unknown,
-  (Partial<Record<ParamsKey, string>> | QUERY_KEY)[]
-> = options => {
+export const useGetAllVacancies: UseQueryHook<VacanciesResponseType> = options => {
   const [params] = useParamsStore(selectParamsState)
 
   return useQuery({
-    queryKey: [QUERY_KEY.GET_ALL_VACANCIES, params],
+    queryKey: [QUERY_KEY.GET_ALL_VACANCIES],
     queryFn: () => vacanciesAPI.getVacancies({ ...params }),
+    enabled: false,
     ...options,
   })
 }

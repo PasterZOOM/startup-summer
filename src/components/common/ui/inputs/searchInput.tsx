@@ -9,7 +9,7 @@ import { selectKeywordState, useParamsStore } from '@/store/useParamsStore'
 export const SearchInput: FC = () => {
   const [keyword, setKeyword] = useParamsStore(selectKeywordState)
 
-  const { refetch } = useGetAllVacancies({ enabled: false })
+  const { refetch } = useGetAllVacancies()
 
   const onKeyDownEnter: KeyboardEventHandler = async e => {
     if (e.key === 'Enter') {

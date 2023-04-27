@@ -14,7 +14,7 @@ const openSans = OpenSans({ subsets: ['latin'] })
 export const NotFound: FC = () => {
   const { pathname, push } = useRouter()
   const clearParams = useParamsStore(selectClearParams)
-  const { refetch } = useGetAllVacancies({ enabled: false })
+  const { refetch } = useGetAllVacancies()
 
   const onButtonClick = async (): Promise<void> => {
     if (pathname.includes('/vacancies')) {

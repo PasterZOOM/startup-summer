@@ -8,7 +8,7 @@ import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
 
 export const ClearFiltersButton: FC = () => {
   const clearParams = useParamsStore(selectClearParams)
-  const { refetch } = useGetAllVacancies({ enabled: false })
+  const { refetch } = useGetAllVacancies()
 
   const onButtonClick = async (): Promise<void> => {
     await clearParams()
