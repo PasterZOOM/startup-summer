@@ -1,11 +1,10 @@
 import { FC } from 'react'
 
-import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { v1 } from 'uuid'
 
-import logo from '../../../../public/logo.svg'
+import { LogoSvg } from '@/components/svg/logoSvg'
 
 type LinkType = {
   id: string
@@ -22,15 +21,17 @@ const Header: FC = () => {
 
   return (
     <div className="flex items-center justify-around bg-white py-6">
-      <Link href={links[0].href}>
-        <Image src={logo} alt="logo" width={141} height={36} />
+      <Link href={links[0].href} className="focus:outline-offset-4 focus:outline-blue-main-500">
+        <LogoSvg />
       </Link>
       <nav className="flex justify-between gap-15">
         {links.map(link => (
           <Link
             key={link.id}
             href={link.href}
-            className={pathname.includes(link.href) ? 'text-blue-main-500' : ''}
+            className={`focus:outline-offset-4 focus:outline-blue-main-500 ${
+              pathname.includes(link.href) ? 'text-blue-main-500' : ''
+            }`}
           >
             {link.title}
           </Link>
