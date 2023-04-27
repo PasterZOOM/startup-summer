@@ -10,11 +10,13 @@ type ActionsType = {
   setPaymentFrom: SetFunctionType
   setPaymentTo: SetFunctionType
   setCatalogues: SetFunctionType
+  setPageCount: SetFunctionType
+  setPage: SetFunctionType
 }
 type StoreType = ActionsType & StateType
 
 const initialState: StateType = {
-  params: {},
+  params: { count: '4' },
 }
 
 export const useParamsStore = create<StoreType>((set, get) => ({
@@ -25,6 +27,8 @@ export const useParamsStore = create<StoreType>((set, get) => ({
   setPaymentFrom: paymentFrom => set({ params: { ...get().params, payment_from: paymentFrom } }),
   setPaymentTo: paymentTo => set({ params: { ...get().params, payment_to: paymentTo } }),
   setCatalogues: catalogues => set({ params: { ...get().params, catalogues } }),
+  setPageCount: count => set({ params: { ...get().params, count } }),
+  setPage: page => set({ params: { ...get().params, page } }),
 }))
 
 export const selectParamsState: StateSelectorType<GetVacanciesParamsType> = store => [
@@ -47,6 +51,8 @@ export const selectCatalogues: StateSelectorType = store => [
   store.params.catalogues,
   store.setCatalogues,
 ]
+export const selectPageCount: StateSelectorType = store => [store.params.count, store.setPageCount]
+export const selectPage: StateSelectorType = store => [store.params.page, store.setPage]
 
 export const selectClearParams = (store: StoreType): ClearQueryParamsFnType =>
   store.clearQueryParams

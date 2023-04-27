@@ -7,6 +7,7 @@ import { CatalogType } from '@/api/catalogs/types'
 import { VacanciesResponseType } from '@/api/vacancies/types'
 import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
+import { PaginationBlock } from '@/components/common/pagination/paginationBlock'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { NotFound } from '@/components/common/ui/notFound'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
@@ -43,9 +44,8 @@ const Vacancies: NextPageWithLayout<PropsType> = ({ vacancies, catalogs }: Props
             <VacancyCard key={vacancy.id} vacancy={vacancy} />
           ))}
         </div>
-        <div className="flex justify-center">
-          <Pagination total={3} />
-        </div>
+
+        <PaginationBlock />
       </MainContainer>
     </div>
   )
