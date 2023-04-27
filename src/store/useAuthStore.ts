@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { AuthByPasswordResponseType } from '@/api/auth/authAPI'
+import { AuthByPasswordResponseType } from '@/api/auth/types'
 
 type StateType = AuthByPasswordResponseType
 type ActionsType = { setAccessToken: SetAccessTokenFnType }

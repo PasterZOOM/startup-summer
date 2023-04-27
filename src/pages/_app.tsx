@@ -19,7 +19,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
-        defaultOptions: { queries: { refetchOnWindowFocus: false } },
+        defaultOptions: { queries: { refetchOnWindowFocus: false, retryDelay: 3000 } },
       })
   )
   const getLayout = Component.getLayout ?? (page => page)
