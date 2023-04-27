@@ -1,12 +1,12 @@
 import { FC } from 'react'
 
 import { Button } from '@mantine/core'
-// eslint-disable-next-line camelcase
-import { Open_Sans } from 'next/font/google'
+import { Open_Sans as OpenSans } from 'next/font/google'
+import Link from 'next/link'
 
 import { NotFoundSvg } from '@/components/svg/notFoundSvg'
 
-const openSans = Open_Sans({ subsets: ['latin'] })
+const openSans = OpenSans({ subsets: ['latin'] })
 
 export const NotFound: FC = () => {
   return (
@@ -15,9 +15,11 @@ export const NotFound: FC = () => {
       <h2 className="text-center text-title-ll font-bold text-gray-900">
         Упс, здесь еще ничего нет!
       </h2>
-      <Button variant="light" radius="md" className={`bg-blue-100 ${openSans.className}`}>
-        Поиск Вакансий
-      </Button>
+      <Link href="/vacancies">
+        <Button variant="light" radius="md" className={`bg-blue-100 ${openSans.className}`}>
+          Поиск Вакансий
+        </Button>
+      </Link>
     </div>
   )
 }

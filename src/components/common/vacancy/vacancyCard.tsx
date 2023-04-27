@@ -7,7 +7,7 @@ import { VacancyTitle } from '@/components/common/vacancy/common/vacancyTitle'
 
 export const VacancyCard: FC = () => {
   return (
-    <Paper className="flex w-full max-w-193.25 items-start justify-between p-6">
+    <Paper className="flex items-start justify-between p-6" tabIndex={0}>
       <div className="space-y-3">
         <VacancyTitle className="text-title-ss font-semibold text-blue-main-500">
           Менеджер-дизайнер
@@ -19,7 +19,7 @@ export const VacancyCard: FC = () => {
         </div>
         <Location className="text-title-base-mb">Новый Уренгой</Location>
       </div>
-      <FavoriteStare isChecked={false} />
+      <FavoriteStare isChecked/>
     </Paper>
   )
 }

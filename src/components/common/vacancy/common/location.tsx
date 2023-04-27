@@ -9,9 +9,13 @@ type PropsType = {
 
 export const Location: FC<PropsType> = ({ className, children }) => {
   return (
-    <div className={`flex gap-2 ${className ?? ''}`}>
-      <LocationIcon />
-      <div>{children}</div>
+    <div
+      className={`group flex gap-2 focus:outline-0 ${className ?? ''}`}
+      tabIndex={0}
+      role="button"
+    >
+      <LocationIcon className="text-gray-600 group-focus:text-blue-main-500" />
+      <div className="group-focus:text-blue-main-500">{children}</div>
     </div>
   )
 }

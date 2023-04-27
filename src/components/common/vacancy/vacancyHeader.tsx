@@ -7,7 +7,7 @@ import { VacancyTitle } from '@/components/common/vacancy/common/vacancyTitle'
 
 export const VacancyHeader: FC = () => {
   return (
-    <Paper className="flex w-full max-w-193.25 items-start justify-between p-6">
+    <Paper className="flex items-start justify-between p-6">
       <div className="space-y-4">
         <VacancyTitle className="text-title-l font-bold">Менеджер-дизайнер</VacancyTitle>
         <div className="flex gap-3 text-title-s ">
@@ -17,7 +17,7 @@ export const VacancyHeader: FC = () => {
         </div>
         <Location className="text-title-base-m">Новый Уренгой</Location>
       </div>
-      <FavoriteStare isChecked />
+      <FavoriteStare isChecked={false} />
     </Paper>
   )
 }
