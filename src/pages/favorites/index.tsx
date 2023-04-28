@@ -38,7 +38,11 @@ const Favorites: NextPageWithLayout = () => {
         {Object.values(vacancies)
           .slice(page * PAGE_COUNT, page * PAGE_COUNT + PAGE_COUNT)
           .map(vacancy => (
-            <Link key={vacancy.id} href={`/vacancies/${vacancy.id}`} className="block">
+            <Link
+              key={vacancy.id}
+              href={`/vacancies/${vacancy.id}`}
+              className="block rounded-xl focus:outline-offset-4 focus:outline-blue-main-500"
+            >
               <VacancyCard vacancy={vacancy} />
             </Link>
           ))}

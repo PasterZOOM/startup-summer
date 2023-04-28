@@ -54,7 +54,7 @@ const Vacancies: NextPageWithLayout = () => {
                 data-elem={`vacancy-${vacancy.id}`}
                 key={vacancy.id}
                 href={`/vacancies/${vacancy.id}`}
-                className="block"
+                className="block rounded-xl focus:outline-offset-4 focus:outline-blue-main-500"
               >
                 <VacancyCard vacancy={vacancy} />
               </Link>
