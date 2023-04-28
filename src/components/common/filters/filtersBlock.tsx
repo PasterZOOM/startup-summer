@@ -15,9 +15,15 @@ import {
   selectPaymentTo,
   useParamsStore,
 } from '@/store/useParamsStore'
+import { useWindowSize } from '@/store/useWindowSize'
+
+const MIN_WIDTH_FOR_FULL_TITLE = 450
+const MMA_WIDTH_FOR_FULL_TITLE = 1024
 
 export const FiltersBlock: FC = () => {
   const applyFilters = useApplyFilters()
+  const { width } = useWindowSize()
+
   const { data: catalogs } = useGetCatalogs()
 
   const [catalogues, setCatalogues] = useParamsStore(selectCatalogues)
@@ -25,7 +31,7 @@ export const FiltersBlock: FC = () => {
   const [paymentTo, setPaymentTo] = useParamsStore(selectPaymentTo)
 
   return (
-    <Paper className="w-78.75 space-y-8 p-4">
+    <Paper className="m-auto max-w-193.25 space-y-8 p-4 lg:w-78.75">
       <div className="flex items-center justify-between">
         <span className="text-title-s font-bold">Фильтры</span>
         <ClearFiltersButton />
@@ -46,9 +52,15 @@ export const FiltersBlock: FC = () => {
               item: { padding: '5px 0 5px 5px' },
             }}
             data={
-              catalogs?.map(el => ({ value: el.key.toString(), label: el.title_trimmed })) ?? []
+              catalogs?.map(el => ({
+                value: el.key.toString(),
+                label:
+                  width < MIN_WIDTH_FOR_FULL_TITLE || width > MMA_WIDTH_FOR_FULL_TITLE
+                    ? el.title_trimmed
+                    : el.title,
+              })) ?? []
             }
-            value={catalogues}
+            value={catalogues ?? null}
             onChange={value => setCatalogues(value ?? undefined)}
           />
         </FilterWrapper>

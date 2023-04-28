@@ -37,12 +37,14 @@ const Vacancies: NextPageWithLayout = () => {
   if (!data) return <CustomLoader />
 
   return (
-    <div className={`${inter.className} flex justify-center gap-7 p-10`}>
+    <div
+      className={`${inter.className} flex flex-col justify-center gap-2 p-2 md:gap-4 md:p-10 lg:flex-row lg:gap-7`}
+    >
       <aside>
         <FiltersBlock />
       </aside>
-      <MainContainer className="space-y-10">
-        <div className="space-y-4">
+      <MainContainer className="m-auto space-y-2 md:space-y-5 lg:m-0 lg:space-y-10">
+        <div className="space-y-2 md:space-y-4">
           <SearchInput />
           {isFetching ? (
             <CustomLoader />

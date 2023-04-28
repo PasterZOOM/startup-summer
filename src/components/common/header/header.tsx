@@ -52,25 +52,30 @@ const Header: FC = () => {
     <div
       className={`${
         isVisible ? 'top-0' : '-top-20'
-      } sticky z-30 flex transform items-center justify-around bg-white px-3 py-5 duration-300`}
+      } sticky z-30  transform  bg-white px-3 py-5 duration-300 md:px-10`}
     >
-      <Link href={links[0].baseUrl} className="focus:outline-offset-4 focus:outline-blue-main-500">
-        <LogoSvg />
-      </Link>
-      <nav className="flex justify-between gap-15">
-        {links.map(link => (
-          <Link
-            key={link.id}
-            href={link.href}
-            className={`focus:outline-offset-4 focus:outline-blue-main-500 ${
-              pathname.includes(link.baseUrl) ? 'text-blue-main-500' : ''
-            }`}
-          >
-            {link.title}
-          </Link>
-        ))}
-      </nav>
-      <div className="w-35.25" />
+      <div className="mx-auto flex max-w-279 items-center justify-between">
+        <Link
+          href={links[0].baseUrl}
+          className="focus:outline-offset-4 focus:outline-blue-main-500"
+        >
+          <LogoSvg />
+        </Link>
+        <nav className="contents justify-between gap-15 md:flex">
+          {links.map(link => (
+            <Link
+              key={link.id}
+              href={link.href}
+              className={`focus:outline-offset-4 focus:outline-blue-main-500 ${
+                pathname.includes(link.baseUrl) ? 'text-blue-main-500' : ''
+              }`}
+            >
+              {link.title}
+            </Link>
+          ))}
+        </nav>
+        <div className="hidden w-35.25 md:block" />
+      </div>
     </div>
   )
 }

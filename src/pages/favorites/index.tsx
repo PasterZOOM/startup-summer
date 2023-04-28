@@ -10,6 +10,7 @@ import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 import { selectVacancies, useFavoriteVacanciesStore } from '@/store/useFavoritVacanciesStore'
+import { TABLET_WIDTH, useWindowSize } from '@/store/useWindowSize'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,6 +18,7 @@ const PAGE_COUNT = 4
 
 const Favorites: NextPageWithLayout = () => {
   const { push } = useRouter()
+  const { width } = useWindowSize()
   const vacancies = useFavoriteVacanciesStore(selectVacancies)
   const [page, setPage] = useState(0)
 
@@ -31,8 +33,8 @@ const Favorites: NextPageWithLayout = () => {
   }, [length])
 
   return (
-    <div className="flex justify-center p-10">
-      <MainContainer className={`${inter.className} space-y-5`}>
+    <div className="flex justify-center p-2 md:p-10">
+      <MainContainer className={`${inter.className} space-y-2 md:space-y-5`}>
         {Object.values(vacancies)
           .slice(page * PAGE_COUNT, page * PAGE_COUNT + PAGE_COUNT)
           .map(vacancy => (
@@ -44,6 +46,7 @@ const Favorites: NextPageWithLayout = () => {
           <div className="flex w-full justify-center">
             <Pagination
               value={page + 1}
+              size={width < TABLET_WIDTH ? 'sm' : 'md'}
               total={Math.ceil(length / PAGE_COUNT)}
               onChange={value => setPage(value - 1)}
             />

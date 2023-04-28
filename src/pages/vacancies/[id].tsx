@@ -29,8 +29,8 @@ const Vacancies: NextPageWithLayout = () => {
   if (error) return <NotFound />
 
   return (
-    <div className="flex justify-center p-10">
-      <MainContainer className={`${inter.className} space-y-5`}>
+    <div className="flex justify-center p-2 md:p-10">
+      <MainContainer className={`${inter.className} space-y-2 md:space-y-5`}>
         {vacancy && (
           <>
             <VacancyHeader vacancy={vacancy} />

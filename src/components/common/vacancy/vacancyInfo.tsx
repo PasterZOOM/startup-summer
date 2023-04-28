@@ -8,7 +8,7 @@ type PropsType = {
 }
 export const VacancyInfo: FC<PropsType> = ({ vacancy }) => {
   return (
-    <Paper className="space-y-5 p-6">
+    <Paper className="p-4 md:p-6">
       <div className="Container" dangerouslySetInnerHTML={{ __html: vacancy.vacancyRichText }} />
     </Paper>
   )
