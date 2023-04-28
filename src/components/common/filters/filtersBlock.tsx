@@ -7,8 +7,8 @@ import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersB
 import { InputNumber } from '@/components/common/ui/inputs/inputNumber'
 import { Paper } from '@/components/common/ui/wrappers/paper'
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
-import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
+import { useApplyFilters } from '@/hooks/useApplyFilters'
 import {
   selectCatalogues,
   selectPaymentFrom,
@@ -17,7 +17,7 @@ import {
 } from '@/store/useParamsStore'
 
 export const FiltersBlock: FC = () => {
-  const { refetch } = useGetAllVacancies()
+  const applyFilters = useApplyFilters()
   const { data: catalogs } = useGetCatalogs()
 
   const [catalogues, setCatalogues] = useParamsStore(selectCatalogues)
@@ -25,7 +25,7 @@ export const FiltersBlock: FC = () => {
   const [paymentTo, setPaymentTo] = useParamsStore(selectPaymentTo)
 
   return (
-    <Paper className="max-w-78.75 space-y-8 p-4">
+    <Paper className="w-78.75 space-y-8 p-4">
       <div className="flex items-center justify-between">
         <span className="text-title-s font-bold">Фильтры</span>
         <ClearFiltersButton />
@@ -34,6 +34,7 @@ export const FiltersBlock: FC = () => {
       <div className="space-y-4">
         <FilterWrapper title="Отрасль">
           <Select
+            data-elem="industry-select"
             placeholder="Выберете отрасль"
             rightSection={<SelectArrayIcon />}
             rightSectionWidth={36}
@@ -54,18 +55,26 @@ export const FiltersBlock: FC = () => {
 
         <FilterWrapper title="Оклад">
           <InputNumber
+            data-elem="salary-from-input"
             placeholder="От"
             value={Number(paymentFrom) || ''}
             onChange={value => setPaymentFrom(value.toString())}
           />
           <InputNumber
+            data-elem="salary-to-input"
             placeholder="До"
             value={Number(paymentTo) || ''}
             onChange={value => setPaymentTo(value.toString())}
           />
         </FilterWrapper>
 
-        <Button radius="md" size="md" className="w-full bg-blue-main-500" onClick={() => refetch()}>
+        <Button
+          data-elem="search-button"
+          radius="md"
+          size="md"
+          className="w-full bg-blue-main-500"
+          onClick={applyFilters}
+        >
           Применить
         </Button>
       </div>

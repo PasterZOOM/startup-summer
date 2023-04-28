@@ -1,15 +1,15 @@
 import { FC } from 'react'
 
+import { VacancyType } from '@/api/vacancies/types'
 import { Paper } from '@/components/common/ui/wrappers/paper'
-import { VacancyInfoBlock } from '@/components/common/vacancy/common/vacancyInfoBlock'
-import { conditions, requirements, responsibilitiesMock } from '@/mocks/vacancyInfoMock'
 
-export const VacancyInfo: FC = () => {
+type PropsType = {
+  vacancy: VacancyType
+}
+export const VacancyInfo: FC<PropsType> = ({ vacancy }) => {
   return (
     <Paper className="space-y-5 p-6">
-      <VacancyInfoBlock title="Обязанности" items={responsibilitiesMock} />
-      <VacancyInfoBlock title="Требования" items={requirements} />
-      <VacancyInfoBlock title="Условия" items={conditions} />
+      <div className="Container" dangerouslySetInnerHTML={{ __html: vacancy.vacancyRichText }} />
     </Paper>
   )
 }

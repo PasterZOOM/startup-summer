@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 import { GetVacanciesParamsType } from '@/api/vacancies/types'
 
@@ -16,20 +17,26 @@ type ActionsType = {
 type StoreType = ActionsType & StateType
 
 const initialState: StateType = {
-  params: { count: '4' },
+  params: {},
 }
 
-export const useParamsStore = create<StoreType>((set, get) => ({
-  ...initialState,
-  setQueryParams: params => set({ params }),
-  clearQueryParams: () => set(initialState),
-  setKeyword: keyword => set({ params: { ...get().params, keyword } }),
-  setPaymentFrom: paymentFrom => set({ params: { ...get().params, payment_from: paymentFrom } }),
-  setPaymentTo: paymentTo => set({ params: { ...get().params, payment_to: paymentTo } }),
-  setCatalogues: catalogues => set({ params: { ...get().params, catalogues } }),
-  setPageCount: count => set({ params: { ...get().params, count } }),
-  setPage: page => set({ params: { ...get().params, page } }),
-}))
+export const useParamsStore = create(
+  persist<StoreType>(
+    (set, get) => ({
+      ...initialState,
+      setQueryParams: params => set({ params }),
+      clearQueryParams: () => set(initialState),
+      setKeyword: keyword => set({ params: { ...get().params, keyword } }),
+      setPaymentFrom: paymentFrom =>
+        set({ params: { ...get().params, payment_from: paymentFrom } }),
+      setPaymentTo: paymentTo => set({ params: { ...get().params, payment_to: paymentTo } }),
+      setCatalogues: catalogues => set({ params: { ...get().params, catalogues } }),
+      setPageCount: count => set({ params: { ...get().params, count } }),
+      setPage: page => set({ params: { ...get().params, page } }),
+    }),
+    { name: 'params' }
+  )
+)
 
 export const selectParamsState: StateSelectorType<GetVacanciesParamsType> = store => [
   store.params,

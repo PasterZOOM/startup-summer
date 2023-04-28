@@ -1,10 +1,12 @@
+import axios from 'axios'
+
 import { AuthByPasswordResponseType } from '@/api/auth/types'
-import { instance } from '@/api/instance'
 
 export const authAPI = {
   byPassword: () =>
-    instance
+    axios
       .get<AuthByPasswordResponseType>('/oauth2/password', {
+        baseURL: process.env.NEXT_PUBLIC_BASE_URL,
         params: {
           login: process.env.NEXT_PUBLIC_LOGIN,
           password: process.env.NEXT_PUBLIC_PASSWORD,

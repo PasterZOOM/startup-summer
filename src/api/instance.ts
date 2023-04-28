@@ -9,16 +9,15 @@ export const instance = axios.create({
   },
 })
 
-instance.interceptors.request.use(req => {
+instance.interceptors.request.use(async req => {
   const request = { ...req }
 
   if (typeof window !== 'undefined') {
     const authData = localStorage.getItem('auth')
 
     if (authData) {
-      const { access_token: accessToken, token_type: tokenType } = (
-        JSON.parse(authData) as { state: AuthByPasswordResponseType }
-      ).state
+      const { access_token: accessToken, token_type: tokenType }: AuthByPasswordResponseType =
+        JSON.parse(authData).state
 
       request.headers.Authorization = `${tokenType} ${accessToken}`
     }

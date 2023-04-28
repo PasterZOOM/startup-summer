@@ -1,36 +1,40 @@
-import { Pagination } from '@mantine/core'
+import { useEffect } from 'react'
+
 import { GetServerSideProps } from 'next'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { dehydrate, QueryClient } from 'react-query'
 
 import { catalogsApi } from '@/api/catalogs/catalogsApi'
-import { CatalogType } from '@/api/catalogs/types'
-import { VacanciesResponseType } from '@/api/vacancies/types'
 import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
 import { PaginationBlock } from '@/components/common/pagination/paginationBlock'
+import { CustomLoader } from '@/components/common/ui/customLoader'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
-import { NotFound } from '@/components/common/ui/notFound'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
-import { useGetAccessToken } from '@/hooks/query/useGetAccessToken'
+import { QUERY_KEY } from '@/enums/queryKeys'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
-import { useChangeParams } from '@/hooks/useChangeParams'
+import { useLoadingParametersFromQuery } from '@/hooks/useLoadingParametersFromQuery'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
-type PropsType = { vacancies: VacanciesResponseType; catalogs: CatalogType[] }
+const Vacancies: NextPageWithLayout = () => {
+  useLoadingParametersFromQuery()
+  const { push } = useRouter()
 
-const Vacancies: NextPageWithLayout<PropsType> = ({ vacancies, catalogs }: PropsType) => {
-  useChangeParams()
-  useGetAccessToken()
+  const { data, isFetching } = useGetAllVacancies()
 
-  useGetCatalogs({ initialData: catalogs })
-  const { data } = useGetAllVacancies({ initialData: vacancies })
+  useEffect(() => {
+    if (data && !data.objects.length) {
+      push('404').then()
+    }
+  }, [data])
 
-  if (!data?.objects.length) return <NotFound />
+  if (!data) return <CustomLoader />
 
   return (
     <div className={`${inter.className} flex justify-center gap-7 p-10`}>
@@ -40,9 +44,20 @@ const Vacancies: NextPageWithLayout<PropsType> = ({ vacancies, catalogs }: Props
       <MainContainer className="space-y-10">
         <div className="space-y-4">
           <SearchInput />
-          {data?.objects.map(vacancy => (
-            <VacancyCard key={vacancy.id} vacancy={vacancy} />
-          ))}
+          {isFetching ? (
+            <CustomLoader />
+          ) : (
+            data?.objects.map(vacancy => (
+              <Link
+                data-elem={`vacancy-${vacancy.id}`}
+                key={vacancy.id}
+                href={`/vacancies/${vacancy.id}`}
+                className="block"
+              >
+                <VacancyCard vacancy={vacancy} />
+              </Link>
+            ))
+          )}
         </div>
 
         <PaginationBlock />
@@ -55,8 +70,16 @@ Vacancies.getLayout = MainLayout
 export default Vacancies
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const vacancies = await vacanciesAPI.getVacancies(query)
-  const catalogs = await catalogsApi.getCatalogs()
+  const queryClient = new QueryClient()
 
-  return { props: { vacancies, catalogs } }
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEY.GET_ALL_VACANCIES],
+    queryFn: () => vacanciesAPI.getVacancies(query),
+  })
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEY.GET_CATALOGS],
+    queryFn: catalogsApi.getCatalogs,
+  })
+
+  return { props: { dehydratedState: dehydrate(queryClient) } }
 }

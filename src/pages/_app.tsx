@@ -7,6 +7,9 @@ import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 
+import { useGetAccessToken } from '@/hooks/useGetAccessToken'
+import { useLoader } from '@/hooks/useLoader'
+
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode
 }
@@ -16,12 +19,16 @@ type AppPropsWithLayout = AppProps & {
 }
 
 const App = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
+  useLoader()
+  useGetAccessToken()
+
   const [queryClient] = useState(
     () =>
       new QueryClient({
         defaultOptions: { queries: { refetchOnWindowFocus: false, retryDelay: 3000 } },
       })
   )
+
   const getLayout = Component.getLayout ?? (page => page)
 
   return getLayout(

@@ -1,17 +1,27 @@
+import { useEffect } from 'react'
+
 import { Inter } from 'next/font/google'
 
+import { NotFound } from '@/components/common/ui/notFound'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
+import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const NotFound: NextPageWithLayout = () => {
+const Error: NextPageWithLayout = () => {
+  const clearParams = useParamsStore(selectClearParams)
+
+  useEffect(() => {
+    clearParams()
+  }, [])
+
   return (
-    <main className={`${inter.className} flex items-center justify-center p-24 text-9xl`}>
-      404 Not found
+    <main className={`${inter.className} `}>
+      <NotFound />
     </main>
   )
 }
 
-NotFound.getLayout = MainLayout
-export default NotFound
+Error.getLayout = MainLayout
+export default Error

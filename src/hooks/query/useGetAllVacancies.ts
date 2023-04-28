@@ -11,7 +11,7 @@ export const useGetAllVacancies: UseQueryHook<VacanciesResponseType> = options =
 
   return useQuery({
     queryKey: [QUERY_KEY.GET_ALL_VACANCIES],
-    queryFn: () => vacanciesAPI.getVacancies({ ...params }),
+    queryFn: () => vacanciesAPI.getVacancies(params),
     enabled: false,
     ...options,
   })

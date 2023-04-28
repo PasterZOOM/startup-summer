@@ -3,28 +3,33 @@ import { FC, KeyboardEventHandler } from 'react'
 import { Button, Input } from '@mantine/core'
 
 import { SearchIcon } from '@/components/svg/searchIcon'
-import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
+import { useApplyFilters } from '@/hooks/useApplyFilters'
 import { selectKeywordState, useParamsStore } from '@/store/useParamsStore'
 
 export const SearchInput: FC = () => {
   const [keyword, setKeyword] = useParamsStore(selectKeywordState)
-
-  const { refetch } = useGetAllVacancies()
+  const applyFilters = useApplyFilters()
 
   const onKeyDownEnter: KeyboardEventHandler = async e => {
     if (e.key === 'Enter') {
-      await refetch()
+      await applyFilters()
     }
   }
 
   return (
     <Input
+      data-elem="search-input"
       icon={<SearchIcon />}
       radius="md"
       styles={{ input: { height: '48px' } }}
       placeholder="Введите название вакансии"
       rightSection={
-        <Button radius="md" className="bg-blue-main-500" onClick={() => refetch()}>
+        <Button
+          data-elem="search-button"
+          radius="md"
+          className="bg-blue-main-500"
+          onClick={applyFilters}
+        >
           Поиск
         </Button>
       }
