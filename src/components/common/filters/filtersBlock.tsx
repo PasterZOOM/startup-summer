@@ -71,12 +71,15 @@ export const FiltersBlock: FC = () => {
             placeholder="От"
             value={Number(paymentFrom) || ''}
             onChange={value => setPaymentFrom(value.toString())}
+            max={Number(paymentTo) || undefined}
+            min={0}
           />
           <InputNumber
             data-elem="salary-to-input"
             placeholder="До"
             value={Number(paymentTo) || ''}
             onChange={value => setPaymentTo(value.toString())}
+            min={paymentFrom ? Number(paymentFrom) : undefined}
           />
         </FilterWrapper>
 

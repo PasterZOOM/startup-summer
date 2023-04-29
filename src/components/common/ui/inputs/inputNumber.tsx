@@ -10,7 +10,7 @@ export const InputNumber: FC<NumberInputProps> = props => {
 
   return (
     <div className="relative">
-      <NumberInput hideControls radius="md" size="md" min={0} handlersRef={handlers} {...props} />
+      <NumberInput hideControls radius="md" size="md" handlersRef={handlers} {...props} />
       <div className="absolute right-3 top-2.25">
         <NumberInputArrayIcon onClick={() => handlers.current?.increment()} />
         <NumberInputArrayIcon
