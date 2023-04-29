@@ -34,7 +34,20 @@ const App = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
   return getLayout(
     <>
       <Head>
+        <title>Startup Summer</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta property="og:url" content="https://startup-summer-lemon.vercel.app/" key="og:url" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Startup Summer" key="og:title" />
+        <meta property="og:description" content="Startup Summer Test" key="og:description" />
+        <meta
+          name="twitter:site"
+          content="https://startup-summer-lemon.vercel.app/"
+          key="twitter:site"
+        />
+        <meta name="twitter:title" content="Startup Summer" />
+        <meta name="twitter:description" content="Startup Summer Test" key="twitter:description" />
+        <meta name="description" content="Startup Summer Test" key="description" />
       </Head>
 
       <MantineProvider
