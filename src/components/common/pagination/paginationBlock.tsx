@@ -21,8 +21,10 @@ export const PaginationBlock: FC = () => {
   const { data } = useGetAllVacancies()
 
   const onPaginationChange = async (value: number): Promise<void> => {
-    setPage(value.toString())
-    await replace({ pathname, query: { ...query, page: value.toString() } }, undefined, {
+    const paramsValue = (value - 1).toString()
+
+    setPage(paramsValue)
+    await replace({ pathname, query: { ...query, page: paramsValue } }, undefined, {
       shallow: true,
     })
   }
@@ -34,9 +36,9 @@ export const PaginationBlock: FC = () => {
   return (
     <div className="flex justify-center">
       <Pagination
-        value={+(page ?? 1)}
+        value={+(page ?? 0) + 1}
         size={width < TABLET_WIDTH ? 'sm' : 'md'}
-        total={Math.floor(
+        total={Math.ceil(
           (+(data?.total ?? 1) > MAX_ITEMS ? MAX_ITEMS : +(data?.total ?? 1)) /
             +(pageCount ?? DEFAULT_PAGE_COUNT)
         )}
