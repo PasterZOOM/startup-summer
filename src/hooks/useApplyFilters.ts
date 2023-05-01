@@ -23,10 +23,10 @@ export const useApplyFilters = (): (() => void) => {
       shallow: true,
     })
 
-    if (page === '1') {
+    if (page === '0') {
       await refetch()
     } else {
-      setPage('1')
+      setPage('0')
     }
   }
 
