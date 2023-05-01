@@ -29,7 +29,7 @@ export const PaginationBlock: FC = () => {
 
   useEffect(() => {
     refetch().then()
-  }, [page])
+  }, [query])
 
   return (
     <div className="flex justify-center">
