@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
-import { AuthByPasswordResponseType } from '@/api/auth/types'
+import { AuthResponseType } from '@/api/auth/types'
 
-type StateType = AuthByPasswordResponseType
-type ActionsType = { setAccessToken: SetAccessTokenFnType }
+type StateType = AuthResponseType
+type ActionsType = { setTokensData: SetAccessTokenFnType; clearTokenData: () => void }
 type StoreType = ActionsType & StateType
 
 const initialState: StateType = {
@@ -19,13 +19,17 @@ export const useUserSettings = create(
   persist<StoreType>(
     set => ({
       ...initialState,
-      setAccessToken: res => set(res),
+      setTokensData: res => set(res),
+      clearTokenData: () => set(initialState),
     }),
     { name: 'auth' }
   )
 )
 
+export const selectTtl = (store: StoreType): number => store.ttl
+export const selectRefreshToken = (store: StoreType): string => store.refresh_token
 export const selectAccessToken = (store: StoreType): string => store.access_token
-export const selectSetAccessToken = (store: StoreType): SetAccessTokenFnType => store.setAccessToken
+export const selectSetTokensData = (store: StoreType): SetAccessTokenFnType => store.setTokensData
+export const selectClearTokenData = (store: StoreType): (() => void) => store.clearTokenData
 
-type SetAccessTokenFnType = (res: AuthByPasswordResponseType) => void
+type SetAccessTokenFnType = (res: AuthResponseType) => void

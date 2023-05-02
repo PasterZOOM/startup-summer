@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { AuthByPasswordResponseType } from '@/api/auth/types'
+import { AuthResponseType } from '@/api/auth/types'
 
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -16,7 +16,7 @@ instance.interceptors.request.use(async req => {
     const authData = localStorage.getItem('auth')
 
     if (authData) {
-      const { access_token: accessToken, token_type: tokenType }: AuthByPasswordResponseType =
+      const { access_token: accessToken, token_type: tokenType }: AuthResponseType =
         JSON.parse(authData).state
 
       request.headers.Authorization = `${tokenType} ${accessToken}`
