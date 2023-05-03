@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-const NUMBER_INPUT_ARRAY_ICON = 12
+const NUMBER_INPUT_ARRAY_ICON_SIZE = 12
 
 type PropsType = {
   className?: string
@@ -11,8 +11,8 @@ type PropsType = {
 
 export const NumberInputArrayIcon: FC<PropsType> = ({
   className,
-  width = NUMBER_INPUT_ARRAY_ICON,
-  height = NUMBER_INPUT_ARRAY_ICON,
+  width = NUMBER_INPUT_ARRAY_ICON_SIZE,
+  height = NUMBER_INPUT_ARRAY_ICON_SIZE,
   onClick,
 }) => {
   return (

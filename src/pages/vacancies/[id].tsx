@@ -1,21 +1,25 @@
 import { useEffect } from 'react'
 
+import { GetStaticPaths, GetStaticProps } from 'next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
+import { dehydrate, QueryClient } from 'react-query'
 
+import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { CustomLoader } from '@/components/common/ui/customLoader'
 import { NotFound } from '@/components/common/ui/notFound'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyHeader } from '@/components/common/vacancy/vacancyHeader'
 import { VacancyInfo } from '@/components/common/vacancy/vacancyInfo'
+import { QUERY_KEY } from '@/enums/queryKeys'
 import { useGetVacancy } from '@/hooks/query/useGetVacancy'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 
 const inter = Inter({ subsets: ['latin'] })
 
-const Vacancies: NextPageWithLayout = () => {
-  const { query } = useRouter()
+const Vacancy: NextPageWithLayout = () => {
+  const { query, isFallback } = useRouter()
 
   const { data: vacancy, refetch, isLoading, error } = useGetVacancy(query.id as string)
 
@@ -25,7 +29,7 @@ const Vacancies: NextPageWithLayout = () => {
     }
   }, [query.id])
 
-  if (isLoading) return <CustomLoader />
+  if (isLoading || isFallback) return <CustomLoader />
   if (error) return <NotFound />
 
   return (
@@ -42,5 +46,28 @@ const Vacancies: NextPageWithLayout = () => {
   )
 }
 
-Vacancies.getLayout = MainLayout
-export default Vacancies
+Vacancy.getLayout = MainLayout
+export default Vacancy
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const res = await vacanciesAPI.getVacancies()
+
+  const paths = res.objects.map(vacancy => ({ params: { id: vacancy.id.toString() } }))
+
+  return {
+    paths,
+    fallback: true,
+  }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
+  const { id } = params
+  const queryClient = new QueryClient()
+
+  await queryClient.prefetchQuery({
+    queryKey: [QUERY_KEY.GET_VACANCY, id],
+    queryFn: () => vacanciesAPI.getVacancy(id as string),
+  })
+
+  return { props: { dehydratedState: dehydrate(queryClient) } }
+}

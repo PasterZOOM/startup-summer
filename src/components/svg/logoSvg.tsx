@@ -2,8 +2,8 @@ import { FC } from 'react'
 
 import { useWindowSize, VERTICAL_MOBILE } from '@/store/useWindowSize'
 
-const WIDTH = 141
-const HEIGHT = 36
+const LOGO_SVG_WIDTH = 141
+const LOGO_SVG_HEIGHT = 36
 
 type PropsType = {
   className?: string
@@ -11,13 +11,17 @@ type PropsType = {
   height?: string | number
 }
 
-export const LogoSvg: FC<PropsType> = ({ className, width = WIDTH, height = HEIGHT }) => {
+export const LogoSvg: FC<PropsType> = ({
+  className,
+  width = LOGO_SVG_WIDTH,
+  height = LOGO_SVG_HEIGHT,
+}) => {
   const { width: windowWidth } = useWindowSize()
 
   return (
     <svg
       className={className}
-      width={windowWidth < VERTICAL_MOBILE ? HEIGHT : width}
+      width={windowWidth < VERTICAL_MOBILE ? LOGO_SVG_HEIGHT : width}
       height={height}
       viewBox={windowWidth < VERTICAL_MOBILE ? '0 0 36 36' : '0 0 141 36'}
       fill="none"

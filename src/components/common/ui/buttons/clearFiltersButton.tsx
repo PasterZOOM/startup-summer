@@ -10,12 +10,11 @@ import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
 export const ClearFiltersButton: FC = () => {
   const { pathname, replace } = useRouter()
   const clearParams = useParamsStore(selectClearParams)
-  const { refetch } = useGetAllVacancies()
+  const { isFetching } = useGetAllVacancies()
 
   const onButtonClick = async (): Promise<void> => {
     await clearParams()
     await replace({ pathname }, undefined, { shallow: true })
-    await refetch()
   }
 
   return (
@@ -26,6 +25,7 @@ export const ClearFiltersButton: FC = () => {
       className="p-0 text-sub-title text-gray-500"
       rightIcon={<ClearIcon />}
       onClick={onButtonClick}
+      disabled={isFetching}
     >
       Сбросить все
     </Button>

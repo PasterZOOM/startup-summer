@@ -1,19 +1,26 @@
 import { instance } from '@/api/instance'
 import { GetVacanciesParamsType, VacanciesResponseType, VacancyType } from '@/api/vacancies/types'
+import { DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
+import { REQUEST_PATHS } from '@/enums/paths'
 
 export const vacanciesAPI = {
-  getVacancies: (params: GetVacanciesParamsType) => {
+  getVacancies: (params?: GetVacanciesParamsType) => {
     const temp = { ...params }
 
-    if (params.payment_from || params.payment_to) {
+    const checkPayment = (): boolean => {
+      return !!temp.payment_from || !!temp.payment_to
+    }
+
+    if (checkPayment()) {
       temp.no_agreement = '1'
     }
 
     return instance
-      .get<VacanciesResponseType>('/vacancies/', {
-        params: { published: '1', count: '4', ...temp },
+      .get<VacanciesResponseType>(REQUEST_PATHS.VACANCIES, {
+        params: { published: '1', count: DEFAULT_PAGE_COUNT.toString(), ...temp },
       })
       .then(res => res.data)
   },
-  getVacancy: (id: string) => instance.get<VacancyType>(`/vacancies/${id}/`).then(res => res.data),
+  getVacancy: (id: string) =>
+    instance.get<VacancyType>(`${REQUEST_PATHS.VACANCIES}/${id}/`).then(res => res.data),
 }

@@ -6,23 +6,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { NotFoundSvg } from '@/components/svg/notFoundSvg'
-import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
+import { ROUT_PATHS } from '@/enums/paths'
 
 const openSans = OpenSans({ subsets: ['latin'] })
 
 export const NotFound: FC = () => {
-  const { pathname, push } = useRouter()
-  const clearParams = useParamsStore(selectClearParams)
-  const { refetch } = useGetAllVacancies()
+  const { push } = useRouter()
 
   const onButtonClick = async (): Promise<void> => {
-    if (pathname.includes('/vacancies')) {
-      await clearParams()
-      await refetch()
-    } else {
-      await push('/vacancies')
-    }
+    await push(ROUT_PATHS.VACANCIES)
   }
 
   return (
@@ -31,7 +23,7 @@ export const NotFound: FC = () => {
       <h2 className="text-center text-title-ll font-bold text-gray-900">
         Упс, здесь еще ничего нет!
       </h2>
-      <Link href="/vacancies">
+      <Link href={ROUT_PATHS.VACANCIES}>
         <Button
           variant="light"
           radius="md"

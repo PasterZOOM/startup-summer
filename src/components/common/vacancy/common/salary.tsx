@@ -6,6 +6,7 @@ type PropsType = {
   currency: string
   className: string
 }
+
 export const Salary: FC<PropsType> = ({ from, to, currency, className }) => {
   return (
     <div className={className}>

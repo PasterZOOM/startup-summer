@@ -1,7 +1,7 @@
 import { FC } from 'react'
 
-const WIDTH = 241
-const HEIGHT = 231
+const NOT_FOUND_SVG_WIDTH = 241
+const NOT_FOUND_SVG_HEIGHT = 231
 
 type PropsType = {
   className?: string
@@ -9,7 +9,11 @@ type PropsType = {
   height?: string | number
 }
 
-export const NotFoundSvg: FC<PropsType> = ({ className, width = WIDTH, height = HEIGHT }) => {
+export const NotFoundSvg: FC<PropsType> = ({
+  className,
+  width = NOT_FOUND_SVG_WIDTH,
+  height = NOT_FOUND_SVG_HEIGHT,
+}) => {
   return (
     <svg
       className={className}

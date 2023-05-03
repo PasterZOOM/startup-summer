@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { v1 } from 'uuid'
 
 import { LogoSvg } from '@/components/svg/logoSvg'
+import { ROUT_PATHS } from '@/enums/paths'
 import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
 
 type LinkType = {
@@ -25,10 +26,10 @@ const Header: FC = () => {
     {
       id: v1(),
       title: 'Поиск Вакансий',
-      baseUrl: '/vacancies',
-      href: { pathname: '/vacancies', query: params },
+      baseUrl: ROUT_PATHS.VACANCIES,
+      href: { pathname: ROUT_PATHS.VACANCIES, query: params },
     },
-    { id: v1(), title: 'Избранное', baseUrl: '/favorites', href: '/favorites' },
+    { id: v1(), title: 'Избранное', baseUrl: ROUT_PATHS.FAVORITES, href: ROUT_PATHS.FAVORITES },
   ]
 
   useEffect(() => {

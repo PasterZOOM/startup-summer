@@ -7,6 +7,8 @@ import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersB
 import { InputNumber } from '@/components/common/ui/inputs/inputNumber'
 import { Paper } from '@/components/common/ui/wrappers/paper'
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
+import { MAX_WIDTH_FOR_FULL_TITLE, MIN_WIDTH_FOR_FULL_TITLE } from '@/constatnts/constants'
+import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
 import {
@@ -17,18 +19,20 @@ import {
 } from '@/store/useParamsStore'
 import { useWindowSize } from '@/store/useWindowSize'
 
-const MIN_WIDTH_FOR_FULL_TITLE = 450
-const MMA_WIDTH_FOR_FULL_TITLE = 1024
-
 export const FiltersBlock: FC = () => {
   const applyFilters = useApplyFilters()
   const { width } = useWindowSize()
 
-  const { data: catalogs } = useGetCatalogs()
+  const { data: catalogs = [] } = useGetCatalogs()
+  const { isFetching } = useGetAllVacancies()
 
-  const [catalogues, setCatalogues] = useParamsStore(selectCatalogues)
+  const [catalogues = null, setCatalogues] = useParamsStore(selectCatalogues)
   const [paymentFrom, setPaymentFrom] = useParamsStore(selectPaymentFrom)
   const [paymentTo, setPaymentTo] = useParamsStore(selectPaymentTo)
+
+  const checkWidth = (): boolean => {
+    return width < MIN_WIDTH_FOR_FULL_TITLE || width > MAX_WIDTH_FOR_FULL_TITLE
+  }
 
   return (
     <Paper className="m-auto max-w-193.25 space-y-8 p-4 lg:w-78.75">
@@ -51,17 +55,13 @@ export const FiltersBlock: FC = () => {
               rightSection: { pointerEvents: 'none', paddingRight: '12px' },
               item: { padding: '5px 0 5px 5px' },
             }}
-            data={
-              catalogs?.map(el => ({
-                value: el.key.toString(),
-                label:
-                  width < MIN_WIDTH_FOR_FULL_TITLE || width > MMA_WIDTH_FOR_FULL_TITLE
-                    ? el.title_trimmed
-                    : el.title,
-              })) ?? []
-            }
-            value={catalogues ?? null}
+            data={catalogs?.map(el => ({
+              value: el.key.toString(),
+              label: checkWidth() ? el.title_trimmed : el.title,
+            }))}
+            value={catalogues}
             onChange={value => setCatalogues(value ?? undefined)}
+            disabled={isFetching}
           />
         </FilterWrapper>
 
@@ -73,6 +73,7 @@ export const FiltersBlock: FC = () => {
             onChange={value => setPaymentFrom(value.toString())}
             max={Number(paymentTo) || undefined}
             min={0}
+            disabled={isFetching}
           />
           <InputNumber
             data-elem="salary-to-input"
@@ -80,6 +81,7 @@ export const FiltersBlock: FC = () => {
             value={Number(paymentTo) || ''}
             onChange={value => setPaymentTo(value.toString())}
             min={paymentFrom ? Number(paymentFrom) : undefined}
+            disabled={isFetching}
           />
         </FilterWrapper>
 
@@ -89,6 +91,7 @@ export const FiltersBlock: FC = () => {
           size="md"
           className="w-full bg-blue-main-500"
           onClick={applyFilters}
+          disabled={isFetching}
         >
           Применить
         </Button>

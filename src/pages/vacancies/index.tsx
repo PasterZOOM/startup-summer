@@ -14,6 +14,7 @@ import { CustomLoader } from '@/components/common/ui/customLoader'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
+import { ROUT_PATHS } from '@/enums/paths'
 import { QUERY_KEY } from '@/enums/queryKeys'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useLoadingParametersFromQuery } from '@/hooks/useLoadingParametersFromQuery'
@@ -53,7 +54,7 @@ const Vacancies: NextPageWithLayout = () => {
               <Link
                 data-elem={`vacancy-${vacancy.id}`}
                 key={vacancy.id}
-                href={`/vacancies/${vacancy.id}`}
+                href={`${ROUT_PATHS.VACANCIES}/${vacancy.id}`}
                 className="block rounded-xl focus:outline-offset-4 focus:outline-blue-main-500"
               >
                 <VacancyCard vacancy={vacancy} />

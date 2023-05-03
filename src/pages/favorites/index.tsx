@@ -7,14 +7,14 @@ import { useRouter } from 'next/router'
 
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
+import { DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
+import { ROUT_PATHS } from '@/enums/paths'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 import { selectVacancies, useFavoriteVacanciesStore } from '@/store/useFavoritVacanciesStore'
 import { TABLET_WIDTH, useWindowSize } from '@/store/useWindowSize'
 
 const inter = Inter({ subsets: ['latin'] })
-
-const PAGE_COUNT = 4
 
 const Favorites: NextPageWithLayout = () => {
   const { push } = useRouter()
@@ -27,7 +27,7 @@ const Favorites: NextPageWithLayout = () => {
   useEffect(() => {
     if (!length) {
       push('404').then()
-    } else if (page + 1 > Math.ceil(length / PAGE_COUNT)) {
+    } else if (page + 1 > Math.ceil(length / DEFAULT_PAGE_COUNT)) {
       setPage(prevState => prevState - 1)
     }
   }, [length])
@@ -36,22 +36,22 @@ const Favorites: NextPageWithLayout = () => {
     <div className="flex justify-center p-2 md:p-10">
       <MainContainer className={`${inter.className} space-y-2 md:space-y-5`}>
         {Object.values(vacancies)
-          .slice(page * PAGE_COUNT, page * PAGE_COUNT + PAGE_COUNT)
+          .slice(page * DEFAULT_PAGE_COUNT, page * DEFAULT_PAGE_COUNT + DEFAULT_PAGE_COUNT)
           .map(vacancy => (
             <Link
               key={vacancy.id}
-              href={`/vacancies/${vacancy.id}`}
+              href={`${ROUT_PATHS.VACANCIES}/${vacancy.id}`}
               className="block rounded-xl focus:outline-offset-4 focus:outline-blue-main-500"
             >
               <VacancyCard vacancy={vacancy} />
             </Link>
           ))}
-        {length > PAGE_COUNT && (
+        {length > DEFAULT_PAGE_COUNT && (
           <div className="flex w-full justify-center">
             <Pagination
               value={page + 1}
               size={width < TABLET_WIDTH ? 'sm' : 'md'}
-              total={Math.ceil(length / PAGE_COUNT)}
+              total={Math.ceil(length / DEFAULT_PAGE_COUNT)}
               onChange={value => setPage(value - 1)}
             />
           </div>

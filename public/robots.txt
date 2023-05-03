@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://startup-summer-lemon.vercel.app/
+
+# Sitemaps
+Sitemap: https://startup-summer-lemon.vercel.app/sitemap.xml

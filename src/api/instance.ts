@@ -5,7 +5,7 @@ import { AuthResponseType } from '@/api/auth/types'
 export const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
   headers: {
-    'x-secret-key': 'GEU4nvd3rej*jeh.eqp',
+    'x-secret-key': process.env.NEXT_PUBLIC_X_SECRET_KEY,
   },
 })
 

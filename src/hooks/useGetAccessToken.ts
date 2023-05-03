@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
 import { authAPI } from '@/api/auth/authAPI'
+import { SECOND_TO_MILLISECOND_COEFFICIENT } from '@/constatnts/constants'
 import {
   selectAccessToken,
   selectRefreshToken,
@@ -8,8 +9,6 @@ import {
   selectTtl,
   useUserSettings,
 } from '@/store/useAuthStore'
-
-const SECOND_TO_MILLISECOND_COEFFICIENT = 1000
 
 export const useGetAccessToken = (): void => {
   const setTokensData = useUserSettings(selectSetTokensData)
