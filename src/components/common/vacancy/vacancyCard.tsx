@@ -15,7 +15,7 @@ export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
   const { inFavorite, onFavoriteStareClick } = useToggleFavorite(vacancy)
 
   return (
-    <Paper className="p-4 md:p-6">
+    <Paper className="p-4 transition hover:bg-gray-50 hover:shadow-black md:p-6">
       <div className="space-y-3">
         <div className="flex items-start justify-between gap-4">
           <VacancyTitle className="text-title-ss font-semibold text-blue-main-500">
@@ -37,7 +37,7 @@ export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
           <div className="hidden text-gray-600 md:block">•</div>
           <div>{vacancy.type_of_work.title}</div>
         </div>
-        <Location className="w-fit text-title-base-mb">{vacancy.town.title}</Location>
+        <Location className="text-title-base-mb">{vacancy.town.title}</Location>
       </div>
     </Paper>
   )

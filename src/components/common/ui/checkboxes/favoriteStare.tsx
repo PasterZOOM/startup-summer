@@ -11,7 +11,7 @@ export const FavoriteStare: FC<PropsType> = ({ isChecked, ...restProps }) => {
     <div {...restProps}>
       <StarIcon
         tabIndex={0}
-        className={`cursor-pointer focus:outline-0 ${
+        className={`cursor-pointer transition hover:fill-blue-400 hover:text-blue-400 focus:outline-0 focus:hover:fill-blue-400 ${
           isChecked
             ? 'fill-blue-main-500 text-blue-main-500 focus:fill-blue-600 focus:text-blue-600'
             : 'text-gray-500 focus:text-blue-main-500'

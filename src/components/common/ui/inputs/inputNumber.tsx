@@ -7,9 +7,18 @@ import { NumberInputArrayIcon } from '@/components/svg/numberInputArrayIcon'
 
 export const InputNumber: FC<NumberInputProps> = props => {
   const handlers = useRef<NumberInputHandlers>()
+  const { disabled } = props
 
-  const incrementHandler = (): void => handlers.current?.increment()
-  const decrementHandler = (): void => handlers.current?.decrement()
+  const incrementHandler = (): void => {
+    if (!disabled) {
+      handlers.current?.increment()
+    }
+  }
+  const decrementHandler = (): void => {
+    if (!disabled) {
+      handlers.current?.decrement()
+    }
+  }
 
   return (
     <div className="relative">
