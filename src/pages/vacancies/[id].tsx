@@ -73,8 +73,8 @@ export const getStaticProps: GetStaticProps = async ({ params = {}, locale = DEF
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
       ...(await serverSideTranslations(locale, ['common'])),
+      dehydratedState: dehydrate(queryClient),
     },
   }
 }
