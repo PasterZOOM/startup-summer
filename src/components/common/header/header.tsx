@@ -45,7 +45,7 @@ const Header: FC = () => {
         href: ROUT_PATHS.FAVORITES,
       },
     ])
-  }, [])
+  }, [params])
 
   useEffect(() => {
     let oldScrollTopPosition = 0
