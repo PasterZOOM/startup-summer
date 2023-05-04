@@ -26,7 +26,7 @@ export const FiltersBlock: FC = () => {
   const { width } = useWindowSize()
 
   const { data: catalogs = [] } = useGetCatalogs()
-  const { isFetching } = useGetAllVacancies()
+  const { data: vacancies } = useGetAllVacancies()
 
   const [catalogues = null, setCatalogues] = useParamsStore(selectCatalogues)
   const [paymentFrom, setPaymentFrom] = useParamsStore(selectPaymentFrom)
@@ -71,7 +71,7 @@ export const FiltersBlock: FC = () => {
             }))}
             value={catalogues}
             onChange={value => setCatalogues(value ?? undefined)}
-            disabled={isFetching}
+            disabled={!vacancies}
           />
         </FilterWrapper>
 
@@ -83,7 +83,7 @@ export const FiltersBlock: FC = () => {
             onChange={value => setPaymentFrom(value.toString())}
             max={Number(paymentTo) || undefined}
             min={0}
-            disabled={isFetching}
+            disabled={!vacancies}
           />
           <InputNumber
             data-elem="salary-to-input"
@@ -91,7 +91,7 @@ export const FiltersBlock: FC = () => {
             value={Number(paymentTo) || ''}
             onChange={value => setPaymentTo(value.toString())}
             min={paymentFrom ? Number(paymentFrom) : undefined}
-            disabled={isFetching}
+            disabled={!vacancies}
           />
         </FilterWrapper>
 
@@ -101,7 +101,7 @@ export const FiltersBlock: FC = () => {
           size="md"
           className="w-full bg-blue-main-500"
           onClick={applyFilters}
-          disabled={isFetching}
+          disabled={!vacancies}
         >
           {applyButtonTitle}
         </Button>

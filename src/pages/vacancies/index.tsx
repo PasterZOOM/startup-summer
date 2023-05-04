@@ -29,15 +29,13 @@ const Vacancies: NextPageWithLayout = () => {
   useLoadingParametersFromQuery()
   const { push } = useRouter()
 
-  const { data, isFetching } = useGetAllVacancies()
+  const { data } = useGetAllVacancies()
 
   useEffect(() => {
     if (data && !data.objects.length) {
       push('404').then()
     }
   }, [data])
-
-  if (!data) return <CustomLoader />
 
   return (
     <div
@@ -49,9 +47,7 @@ const Vacancies: NextPageWithLayout = () => {
       <MainContainer className="m-auto space-y-2 md:space-y-5 lg:m-0 lg:space-y-10">
         <div className="space-y-2 md:space-y-4">
           <SearchInput />
-          {isFetching ? (
-            <CustomLoader />
-          ) : (
+          {data ? (
             data?.objects.map(vacancy => (
               <Link
                 data-elem={`vacancy-${vacancy.id}`}
@@ -62,10 +58,12 @@ const Vacancies: NextPageWithLayout = () => {
                 <VacancyCard vacancy={vacancy} />
               </Link>
             ))
+          ) : (
+            <CustomLoader />
           )}
         </div>
 
-        <PaginationBlock />
+        {data && <PaginationBlock />}
       </MainContainer>
     </div>
   )
@@ -81,7 +79,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
-    queryKey: [QUERY_KEY.GET_ALL_VACANCIES],
+    queryKey: [QUERY_KEY.GET_ALL_VACANCIES, query],
     queryFn: () => vacanciesAPI.getVacancies(query),
   })
   await queryClient.prefetchQuery({

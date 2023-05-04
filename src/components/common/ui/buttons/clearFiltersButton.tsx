@@ -12,7 +12,7 @@ export const ClearFiltersButton: FC = () => {
   const { t } = useTranslation('filters')
   const { pathname, replace } = useRouter()
   const clearParams = useParamsStore(selectClearParams)
-  const { isFetching } = useGetAllVacancies()
+  const { data: vacancies } = useGetAllVacancies()
 
   const onButtonClick = async (): Promise<void> => {
     await clearParams()
@@ -29,7 +29,7 @@ export const ClearFiltersButton: FC = () => {
       className="group p-0 text-sub-title text-gray-500 transition hover:text-blue-main-500 disabled:bg-transparent"
       rightIcon={<ClearIcon />}
       onClick={onButtonClick}
-      disabled={isFetching}
+      disabled={!vacancies}
     >
       {resetAllButtonTitle}
     </Button>

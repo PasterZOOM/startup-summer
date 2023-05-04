@@ -4,9 +4,11 @@ import { useRouter } from 'next/router'
 
 import { ParamsKey } from '@/api/vacancies/types'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
+import { useIsFirstRender } from '@/hooks/useIsFirstRender'
 import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
 
 export const useApplyFilters = (): (() => void) => {
+  const isFirstRender = useIsFirstRender()
   const { refetch } = useGetAllVacancies()
   const { pathname, replace, query } = useRouter()
   const [params] = useParamsStore(selectParamsState)
@@ -24,7 +26,9 @@ export const useApplyFilters = (): (() => void) => {
   }
 
   useEffect(() => {
-    refetch().then()
+    if (!isFirstRender) {
+      refetch().then()
+    }
   }, [query])
 
   return applyFilters

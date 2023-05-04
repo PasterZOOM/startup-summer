@@ -15,7 +15,7 @@ export const PaginationBlock: FC = () => {
   const [pageCount] = useParamsStore(selectPageCount)
   const [page, setPage] = useParamsStore(selectPage)
 
-  const { data, isFetching } = useGetAllVacancies()
+  const { data: vacancies } = useGetAllVacancies()
 
   const onPaginationChange = async (value: number): Promise<void> => {
     const paramsValue = (value - 1).toString()
@@ -32,11 +32,12 @@ export const PaginationBlock: FC = () => {
         value={+(page ?? 0) + 1}
         size={width < TABLET_WIDTH ? 'sm' : 'md'}
         total={Math.ceil(
-          (+(data?.total ?? 1) > MAX_RESPONSE_ITEMS ? MAX_RESPONSE_ITEMS : +(data?.total ?? 1)) /
-            +(pageCount ?? DEFAULT_PAGE_COUNT)
+          (+(vacancies?.total ?? 1) > MAX_RESPONSE_ITEMS
+            ? MAX_RESPONSE_ITEMS
+            : +(vacancies?.total ?? 1)) / +(pageCount ?? DEFAULT_PAGE_COUNT)
         )}
         onChange={onPaginationChange}
-        disabled={isFetching}
+        disabled={!vacancies}
       />
     </div>
   )

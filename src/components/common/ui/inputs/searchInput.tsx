@@ -13,7 +13,7 @@ export const SearchInput: FC = () => {
 
   const [keyword = '', setKeyword] = useParamsStore(selectKeywordState)
   const applyFilters = useApplyFilters()
-  const { isFetching } = useGetAllVacancies()
+  const { data: vacancies } = useGetAllVacancies()
 
   const onKeyDownEnter: KeyboardEventHandler = async e => {
     if (e.key === 'Enter') {
@@ -40,7 +40,7 @@ export const SearchInput: FC = () => {
           radius="md"
           className="bg-blue-main-500"
           onClick={applyFilters}
-          disabled={isFetching}
+          disabled={!vacancies}
         >
           {searchButtonTitle}
         </Button>
@@ -49,7 +49,7 @@ export const SearchInput: FC = () => {
       value={keyword}
       onChange={onChangeInputValue}
       onKeyDown={onKeyDownEnter}
-      disabled={isFetching}
+      disabled={!vacancies}
     />
   )
 }
