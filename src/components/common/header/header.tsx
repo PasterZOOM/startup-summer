@@ -28,15 +28,24 @@ const Header: FC = () => {
   const [isVisible, setIsVisible] = useState(true)
   const [params] = useParamsStore(selectParamsState)
 
-  const links: LinkType[] = [
-    {
-      id: v1(),
-      title: vacanciesTitle,
-      baseUrl: ROUT_PATHS.VACANCIES,
-      href: { pathname: ROUT_PATHS.VACANCIES, query: params },
-    },
-    { id: v1(), title: favoritesTitle, baseUrl: ROUT_PATHS.FAVORITES, href: ROUT_PATHS.FAVORITES },
-  ]
+  const [links, setLinks] = useState<LinkType[]>([])
+
+  useEffect(() => {
+    setLinks([
+      {
+        id: v1(),
+        title: vacanciesTitle,
+        baseUrl: ROUT_PATHS.VACANCIES,
+        href: { pathname: ROUT_PATHS.VACANCIES, query: params },
+      },
+      {
+        id: v1(),
+        title: favoritesTitle,
+        baseUrl: ROUT_PATHS.FAVORITES,
+        href: ROUT_PATHS.FAVORITES,
+      },
+    ])
+  }, [])
 
   useEffect(() => {
     let oldScrollTopPosition = 0
@@ -63,7 +72,7 @@ const Header: FC = () => {
     >
       <div className="mx-auto flex max-w-279 items-center justify-between">
         <Link
-          href={links[0].baseUrl}
+          href={links[0]?.baseUrl ?? ''}
           className="focus:outline-offset-4 focus:outline-blue-main-500"
         >
           <LogoSvg />
