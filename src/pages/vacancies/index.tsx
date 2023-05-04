@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient } from 'react-query'
 
 import { catalogsApi } from '@/api/catalogs/catalogsApi'
@@ -14,6 +15,7 @@ import { CustomLoader } from '@/components/common/ui/customLoader'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
+import { DEFAULT_LOCALE } from '@/constatnts/constants'
 import { ROUT_PATHS } from '@/enums/paths'
 import { QUERY_KEY } from '@/enums/queryKeys'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
@@ -72,7 +74,10 @@ const Vacancies: NextPageWithLayout = () => {
 Vacancies.getLayout = MainLayout
 export default Vacancies
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  query,
+  locale = DEFAULT_LOCALE,
+}) => {
   const queryClient = new QueryClient()
 
   await queryClient.prefetchQuery({
@@ -84,5 +89,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     queryFn: catalogsApi.getCatalogs,
   })
 
-  return { props: { dehydratedState: dehydrate(queryClient) } }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      ...(await serverSideTranslations(locale, ['filters', 'common'])),
+    },
+  }
 }

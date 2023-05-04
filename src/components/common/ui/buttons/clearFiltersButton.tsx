@@ -2,12 +2,14 @@ import { FC } from 'react'
 
 import { Button } from '@mantine/core'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 
 import { ClearIcon } from '@/components/svg/clearIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
 
 export const ClearFiltersButton: FC = () => {
+  const { t } = useTranslation('filters')
   const { pathname, replace } = useRouter()
   const clearParams = useParamsStore(selectClearParams)
   const { isFetching } = useGetAllVacancies()
@@ -16,6 +18,8 @@ export const ClearFiltersButton: FC = () => {
     await clearParams()
     await replace({ pathname }, undefined, { shallow: true })
   }
+
+  const resetAllButtonTitle = t('resetAllButtonTitle', 'Сбросить все')
 
   return (
     <Button
@@ -27,7 +31,7 @@ export const ClearFiltersButton: FC = () => {
       onClick={onButtonClick}
       disabled={isFetching}
     >
-      Сбросить все
+      {resetAllButtonTitle}
     </Button>
   )
 }

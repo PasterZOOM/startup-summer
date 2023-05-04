@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useTranslation } from 'next-i18next'
 import { v1 } from 'uuid'
 
 import { LogoSvg } from '@/components/svg/logoSvg'
@@ -18,6 +19,11 @@ type LinkType = {
 }
 
 const Header: FC = () => {
+  const { t } = useTranslation('common')
+
+  const vacanciesTitle = t('vacanciesTitle', 'Поиск Вакансий')
+  const favoritesTitle = t('favoritesTitle', 'Избранное')
+
   const { pathname } = useRouter()
   const [isVisible, setIsVisible] = useState(true)
   const [params] = useParamsStore(selectParamsState)
@@ -25,11 +31,11 @@ const Header: FC = () => {
   const links: LinkType[] = [
     {
       id: v1(),
-      title: 'Поиск Вакансий',
+      title: vacanciesTitle,
       baseUrl: ROUT_PATHS.VACANCIES,
       href: { pathname: ROUT_PATHS.VACANCIES, query: params },
     },
-    { id: v1(), title: 'Избранное', baseUrl: ROUT_PATHS.FAVORITES, href: ROUT_PATHS.FAVORITES },
+    { id: v1(), title: favoritesTitle, baseUrl: ROUT_PATHS.FAVORITES, href: ROUT_PATHS.FAVORITES },
   ]
 
   useEffect(() => {

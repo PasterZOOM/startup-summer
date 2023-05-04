@@ -1,6 +1,7 @@
 import { ChangeEventHandler, FC, KeyboardEventHandler } from 'react'
 
 import { Button, Input } from '@mantine/core'
+import { useTranslation } from 'next-i18next'
 
 import { SearchIcon } from '@/components/svg/searchIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
@@ -8,6 +9,8 @@ import { useApplyFilters } from '@/hooks/useApplyFilters'
 import { selectKeywordState, useParamsStore } from '@/store/useParamsStore'
 
 export const SearchInput: FC = () => {
+  const { t } = useTranslation('filters')
+
   const [keyword = '', setKeyword] = useParamsStore(selectKeywordState)
   const applyFilters = useApplyFilters()
   const { isFetching } = useGetAllVacancies()
@@ -21,13 +24,16 @@ export const SearchInput: FC = () => {
     setKeyword(e.currentTarget.value)
   }
 
+  const searchButtonTitle = t('searchButtonTitle', 'Поиск')
+  const searchPlaceholder = t('searchPlaceholder', 'Введите название вакансии')
+
   return (
     <Input
       data-elem="search-input"
       icon={<SearchIcon />}
       radius="md"
       styles={{ input: { height: '48px' } }}
-      placeholder="Введите название вакансии"
+      placeholder={searchPlaceholder}
       rightSection={
         <Button
           data-elem="search-button"
@@ -36,7 +42,7 @@ export const SearchInput: FC = () => {
           onClick={applyFilters}
           disabled={isFetching}
         >
-          Поиск
+          {searchButtonTitle}
         </Button>
       }
       rightSectionWidth={95}

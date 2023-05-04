@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import { Button, Select } from '@mantine/core'
+import { useTranslation } from 'next-i18next'
 
 import { FilterWrapper } from '@/components/common/filters/filterWrapper'
 import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersButton'
@@ -20,6 +21,7 @@ import {
 import { useWindowSize } from '@/store/useWindowSize'
 
 export const FiltersBlock: FC = () => {
+  const { t } = useTranslation('filters')
   const applyFilters = useApplyFilters()
   const { width } = useWindowSize()
 
@@ -34,18 +36,26 @@ export const FiltersBlock: FC = () => {
     return width < MIN_WIDTH_FOR_FULL_TITLE || width > MAX_WIDTH_FOR_FULL_TITLE
   }
 
+  const filtersTitle = t('filtersTitle', 'Фильтры')
+  const industryTitle = t('industryTitle', 'Отрасль')
+  const chooseIndustryPlaceholder = t('chooseIndustryPlaceholder', 'Выберете отрасль')
+  const salaryTitle = t('salaryTitle', 'Оклад')
+  const fromPlaceholder = t('fromPlaceholder', 'До')
+  const toPlaceholder = t('toPlaceholder', 'От')
+  const applyButtonTitle = t('applyButtonTitle', 'Принять')
+
   return (
     <Paper className="m-auto max-w-193.25 space-y-8 p-4 lg:w-78.75">
       <div className="flex items-center justify-between">
-        <span className="text-title-s font-bold">Фильтры</span>
+        <span className="text-title-s font-bold">{filtersTitle}</span>
         <ClearFiltersButton />
       </div>
 
       <div className="space-y-4">
-        <FilterWrapper title="Отрасль">
+        <FilterWrapper title={industryTitle}>
           <Select
             data-elem="industry-select"
-            placeholder="Выберете отрасль"
+            placeholder={chooseIndustryPlaceholder}
             rightSection={<SelectArrayIcon />}
             rightSectionWidth={36}
             radius="md"
@@ -65,10 +75,10 @@ export const FiltersBlock: FC = () => {
           />
         </FilterWrapper>
 
-        <FilterWrapper title="Оклад">
+        <FilterWrapper title={salaryTitle}>
           <InputNumber
             data-elem="salary-from-input"
-            placeholder="От"
+            placeholder={fromPlaceholder}
             value={Number(paymentFrom) || ''}
             onChange={value => setPaymentFrom(value.toString())}
             max={Number(paymentTo) || undefined}
@@ -77,7 +87,7 @@ export const FiltersBlock: FC = () => {
           />
           <InputNumber
             data-elem="salary-to-input"
-            placeholder="До"
+            placeholder={toPlaceholder}
             value={Number(paymentTo) || ''}
             onChange={value => setPaymentTo(value.toString())}
             min={paymentFrom ? Number(paymentFrom) : undefined}
@@ -93,7 +103,7 @@ export const FiltersBlock: FC = () => {
           onClick={applyFilters}
           disabled={isFetching}
         >
-          Применить
+          {applyButtonTitle}
         </Button>
       </div>
     </Paper>

@@ -1,24 +1,25 @@
 import '@/styles/globals.css'
-import { ReactElement, ReactNode, useState } from 'react'
+import { ReactElement, useState } from 'react'
 
 import { MantineProvider } from '@mantine/core'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { appWithTranslation } from 'next-i18next'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 
 import { useGetAccessToken } from '@/hooks/useGetAccessToken'
 import { useLoader } from '@/hooks/useLoader'
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode
+  getLayout?: (page: ReactElement) => JSX.Element
 }
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout
 }
 
-const App = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
+const App = ({ Component, pageProps }: AppPropsWithLayout): JSX.Element => {
   useLoader()
   useGetAccessToken()
 
@@ -67,4 +68,4 @@ const App = ({ Component, pageProps }: AppPropsWithLayout): ReactNode => {
   )
 }
 
-export default App
+export default appWithTranslation(App)

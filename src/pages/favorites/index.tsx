@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 
 import { Pagination } from '@mantine/core'
+import { GetStaticProps } from 'next'
 import { Inter } from 'next/font/google'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
-import { DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
+import { DEFAULT_LOCALE, DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
 import { ROUT_PATHS } from '@/enums/paths'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
@@ -63,3 +65,11 @@ const Favorites: NextPageWithLayout = () => {
 
 Favorites.getLayout = MainLayout
 export default Favorites
+
+export const getStaticProps: GetStaticProps = async ({ locale = DEFAULT_LOCALE }) => {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  }
+}

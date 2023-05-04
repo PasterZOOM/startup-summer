@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient } from 'react-query'
 
 import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
@@ -11,6 +12,7 @@ import { NotFound } from '@/components/common/ui/notFound'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyHeader } from '@/components/common/vacancy/vacancyHeader'
 import { VacancyInfo } from '@/components/common/vacancy/vacancyInfo'
+import { DEFAULT_LOCALE } from '@/constatnts/constants'
 import { QUERY_KEY } from '@/enums/queryKeys'
 import { useGetVacancy } from '@/hooks/query/useGetVacancy'
 import { MainLayout } from '@/layouts/mainLayout'
@@ -60,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
+export const getStaticProps: GetStaticProps = async ({ params = {}, locale = DEFAULT_LOCALE }) => {
   const { id } = params
   const queryClient = new QueryClient()
 
@@ -69,5 +71,10 @@ export const getStaticProps: GetStaticProps = async ({ params = {} }) => {
     queryFn: () => vacanciesAPI.getVacancy(id as string),
   })
 
-  return { props: { dehydratedState: dehydrate(queryClient) } }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+      ...(await serverSideTranslations(locale, ['common'])),
+    },
+  }
 }

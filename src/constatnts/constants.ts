@@ -5,3 +5,5 @@ export const MIN_WIDTH_FOR_FULL_TITLE = 450
 export const MAX_WIDTH_FOR_FULL_TITLE = 1024
 
 export const SECOND_TO_MILLISECOND_COEFFICIENT = 1000
+
+export const DEFAULT_LOCALE = 'ru'
