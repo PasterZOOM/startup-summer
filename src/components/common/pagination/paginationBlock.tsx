@@ -37,7 +37,6 @@ export const PaginationBlock: FC = () => {
             : +(vacancies?.total ?? 1)) / +(pageCount ?? DEFAULT_PAGE_COUNT)
         )}
         onChange={onPaginationChange}
-        disabled={!vacancies}
       />
     </div>
   )

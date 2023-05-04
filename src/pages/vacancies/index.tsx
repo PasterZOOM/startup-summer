@@ -8,7 +8,6 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { dehydrate, QueryClient } from 'react-query'
 
 import { catalogsApi } from '@/api/catalogs/catalogsApi'
-import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
 import { PaginationBlock } from '@/components/common/pagination/paginationBlock'
 import { CustomLoader } from '@/components/common/ui/customLoader'
@@ -72,16 +71,9 @@ const Vacancies: NextPageWithLayout = () => {
 Vacancies.getLayout = MainLayout
 export default Vacancies
 
-export const getServerSideProps: GetServerSideProps = async ({
-  query,
-  locale = DEFAULT_LOCALE,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale = DEFAULT_LOCALE }) => {
   const queryClient = new QueryClient()
 
-  await queryClient.prefetchQuery({
-    queryKey: [QUERY_KEY.GET_ALL_VACANCIES, query],
-    queryFn: () => vacanciesAPI.getVacancies(query),
-  })
   await queryClient.prefetchQuery({
     queryKey: [QUERY_KEY.GET_CATALOGS],
     queryFn: catalogsApi.getCatalogs,
