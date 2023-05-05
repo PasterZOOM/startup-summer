@@ -22,5 +22,5 @@ export const vacanciesAPI = {
       .then(res => res.data)
   },
   getVacancy: (id: string) =>
-    instance.get<VacancyType>(`${REQUEST_PATHS.VACANCIES}/${id}/`).then(res => res.data),
+    instance.get<VacancyType>(`${REQUEST_PATHS.VACANCIES}${id}/`).then(res => res.data),
 }

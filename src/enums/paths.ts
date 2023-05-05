@@ -5,5 +5,5 @@ export enum ROUT_PATHS {
 export enum REQUEST_PATHS {
   AUTH = '/oauth2',
   CATALOGUES = '/catalogues',
-  VACANCIES = '/vacancies',
+  VACANCIES = '/vacancies/',
 }
