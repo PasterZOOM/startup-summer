@@ -63,7 +63,6 @@ export const FiltersBlock: FC = () => {
             searchable
             styles={{
               rightSection: { pointerEvents: 'none', paddingRight: '12px' },
-              item: { padding: '5px 0 5px 5px' },
             }}
             data={catalogs?.map(el => ({
               value: el.key.toString(),
