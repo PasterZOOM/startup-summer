@@ -8,7 +8,7 @@ export const vacanciesAPI = {
     const temp = { ...params }
 
     const checkPayment = (): boolean => {
-      return !!+(temp.payment_from ?? '0') || !!+(temp.payment_to ?? '0')
+      return !!temp.payment_from || !!temp.payment_to
     }
 
     if (checkPayment()) {

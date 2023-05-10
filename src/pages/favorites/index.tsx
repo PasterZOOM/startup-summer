@@ -15,6 +15,7 @@ import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
 import { selectVacancies, useFavoriteVacanciesStore } from '@/store/useFavoritVacanciesStore'
 import { TABLET_WIDTH, useWindowSize } from '@/store/useWindowSize'
+import { countTotalPages } from '@/utils/countTotalPages'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -53,7 +54,7 @@ const Favorites: NextPageWithLayout = () => {
             <Pagination
               value={page + 1}
               size={width < TABLET_WIDTH ? 'sm' : 'md'}
-              total={Math.ceil(length / DEFAULT_PAGE_COUNT)}
+              total={countTotalPages(length, DEFAULT_PAGE_COUNT)}
               onChange={value => setPage(value - 1)}
             />
           </div>

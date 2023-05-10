@@ -15,10 +15,10 @@ export const useApplyFilters = (): (() => void) => {
     const queryParams: Partial<Record<ParamsKey, string | []>> = {}
 
     Object.entries(params).forEach(([key, value]) => {
-      queryParams[key as keyof typeof queryParams] = value || []
+      queryParams[key as keyof typeof queryParams] = !value || value === '0' ? [] : value
     })
 
-    await replace({ pathname, query: { ...queryParams, page: '0' } }, undefined, {
+    await replace({ pathname, query: { ...queryParams, page: [] } }, undefined, {
       shallow: true,
     })
   }
