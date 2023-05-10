@@ -84,6 +84,7 @@ export const FiltersBlock: FC = () => {
             max={Number(paymentTo) || undefined}
             min={0}
             disabled={!vacancies}
+            step={500}
           />
           <InputNumber
             data-elem="salary-to-input"
@@ -92,6 +93,7 @@ export const FiltersBlock: FC = () => {
             onChange={value => setPaymentTo(value.toString())}
             min={paymentFrom ? Number(paymentFrom) : undefined}
             disabled={!vacancies}
+            step={500}
           />
         </FilterWrapper>
 
