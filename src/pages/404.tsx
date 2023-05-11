@@ -8,7 +8,7 @@ import { NotFound } from '@/components/common/ui/notFound'
 import { DEFAULT_LOCALE } from '@/constatnts/constants'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
-import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
+import { selectClearParams, useParamsStore } from '@/stores/useParamsStore'
 
 const inter = Inter({ subsets: ['latin'] })
 

@@ -11,10 +11,10 @@ import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
 import { DEFAULT_LOCALE, DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
 import { ROUT_PATHS } from '@/enums/paths'
+import { TABLET_WIDTH, useWindowSize } from '@/hooks/useWindowSize'
 import { MainLayout } from '@/layouts/mainLayout'
 import { NextPageWithLayout } from '@/pages/_app'
-import { selectVacancies, useFavoriteVacanciesStore } from '@/store/useFavoritVacanciesStore'
-import { TABLET_WIDTH, useWindowSize } from '@/store/useWindowSize'
+import { selectVacancies, useFavoriteVacanciesStore } from '@/stores/useFavoritVacanciesStore'
 import { countTotalPages } from '@/utils/countTotalPages'
 
 const inter = Inter({ subsets: ['latin'] })

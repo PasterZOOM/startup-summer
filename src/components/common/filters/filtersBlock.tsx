@@ -12,13 +12,13 @@ import { MAX_WIDTH_FOR_FULL_TITLE, MIN_WIDTH_FOR_FULL_TITLE } from '@/constatnts
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import {
   selectCatalogues,
   selectPaymentFrom,
   selectPaymentTo,
   useParamsStore,
-} from '@/store/useParamsStore'
-import { useWindowSize } from '@/store/useWindowSize'
+} from '@/stores/useParamsStore'
 
 export const FiltersBlock: FC = () => {
   const { t } = useTranslation('filters')

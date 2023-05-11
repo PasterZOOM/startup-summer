@@ -6,7 +6,7 @@ import {
   selectRemoveVacancy,
   selectVacancies,
   useFavoriteVacanciesStore,
-} from '@/store/useFavoritVacanciesStore'
+} from '@/stores/useFavoritVacanciesStore'
 
 export const useToggleFavorite = (
   vacancy: VacancyType

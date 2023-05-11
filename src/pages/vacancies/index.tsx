@@ -47,7 +47,7 @@ const Vacancies: NextPageWithLayout = () => {
         <div className="space-y-2 md:space-y-4">
           <SearchInput />
           {data ? (
-            data?.objects.map(vacancy => (
+            data.objects.map(vacancy => (
               <Link
                 data-elem={`vacancy-${vacancy.id}`}
                 key={vacancy.id}

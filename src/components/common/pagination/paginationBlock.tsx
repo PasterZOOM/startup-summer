@@ -5,8 +5,8 @@ import { useRouter } from 'next/router'
 
 import { DEFAULT_PAGE_COUNT, MAX_RESPONSE_ITEMS } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { selectPage, selectPageCount, useParamsStore } from '@/store/useParamsStore'
-import { TABLET_WIDTH, useWindowSize } from '@/store/useWindowSize'
+import { TABLET_WIDTH, useWindowSize } from '@/hooks/useWindowSize'
+import { selectPage, selectPageCount, useParamsStore } from '@/stores/useParamsStore'
 import { countTotalPages } from '@/utils/countTotalPages'
 
 export const PaginationBlock: FC = () => {

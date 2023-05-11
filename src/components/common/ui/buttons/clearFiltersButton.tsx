@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 
 import { ClearIcon } from '@/components/svg/clearIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { selectClearParams, useParamsStore } from '@/store/useParamsStore'
+import { selectClearParams, useParamsStore } from '@/stores/useParamsStore'
 
 export const ClearFiltersButton: FC = () => {
   const { t } = useTranslation('filters')

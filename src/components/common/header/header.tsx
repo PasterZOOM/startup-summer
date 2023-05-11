@@ -9,7 +9,7 @@ import { v1 } from 'uuid'
 
 import { LogoSvg } from '@/components/svg/logoSvg'
 import { ROUT_PATHS } from '@/enums/paths'
-import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
+import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
 
 type LinkType = {
   id: string

@@ -6,7 +6,7 @@ import { useTranslation } from 'next-i18next'
 import { SearchIcon } from '@/components/svg/searchIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
-import { selectKeywordState, useParamsStore } from '@/store/useParamsStore'
+import { selectKeywordState, useParamsStore } from '@/stores/useParamsStore'
 
 export const SearchInput: FC = () => {
   const { t } = useTranslation('filters')

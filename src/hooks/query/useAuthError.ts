@@ -1,5 +1,5 @@
 import { AuthErrorType } from '@/api/auth/types'
-import { selectClearTokenData, useUserSettings } from '@/store/useAuthStore'
+import { selectClearTokenData, useUserSettings } from '@/stores/useAuthStore'
 
 export const useAuthError = (): ((data: AuthErrorType) => void) => {
   const clearTokensData = useUserSettings(selectClearTokenData)

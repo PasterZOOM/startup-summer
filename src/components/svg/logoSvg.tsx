@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { useWindowSize, VERTICAL_MOBILE } from '@/store/useWindowSize'
+import { useWindowSize, VERTICAL_MOBILE } from '@/hooks/useWindowSize'
 
 const LOGO_SVG_WIDTH = 141
 const LOGO_SVG_HEIGHT = 36

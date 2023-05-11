@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
+import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
 
 export const useLoadingParametersFromQuery = (): void => {
   const { query } = useRouter()

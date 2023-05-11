@@ -8,7 +8,7 @@ import {
   selectSetTokensData,
   selectTtl,
   useUserSettings,
-} from '@/store/useAuthStore'
+} from '@/stores/useAuthStore'
 
 export const useGetAccessToken = (): void => {
   const setTokensData = useUserSettings(selectSetTokensData)

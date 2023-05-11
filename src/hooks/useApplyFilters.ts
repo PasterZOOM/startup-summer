@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { ParamsKey } from '@/api/vacancies/types'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { selectParamsState, useParamsStore } from '@/store/useParamsStore'
+import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
 
 export const useApplyFilters = (): (() => void) => {
   const { refetch } = useGetAllVacancies()
