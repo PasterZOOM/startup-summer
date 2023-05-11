@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { memo } from 'react'
 
 import { Button } from '@mantine/core'
 import { useRouter } from 'next/router'
@@ -8,7 +8,7 @@ import { ClearIcon } from '@/components/svg/clearIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { selectClearParams, useParamsStore } from '@/stores/useParamsStore'
 
-export const ClearFiltersButton: FC = () => {
+export const ClearFiltersButton = memo(() => {
   const { t } = useTranslation('filters')
   const { pathname, replace } = useRouter()
   const clearParams = useParamsStore(selectClearParams)
@@ -34,4 +34,4 @@ export const ClearFiltersButton: FC = () => {
       {resetAllButtonTitle}
     </Button>
   )
-}
+})

@@ -1,11 +1,11 @@
-import { FC, useRef } from 'react'
+import { memo, useRef } from 'react'
 
 import { NumberInput, NumberInputHandlers } from '@mantine/core'
 import { NumberInputProps } from '@mantine/core/lib/NumberInput/NumberInput'
 
 import { NumberInputArrayIcon } from '@/components/svg/numberInputArrayIcon'
 
-export const InputNumber: FC<NumberInputProps> = props => {
+export const InputNumber = memo((props: NumberInputProps) => {
   const handlers = useRef<NumberInputHandlers>()
   const { disabled } = props
 
@@ -29,4 +29,4 @@ export const InputNumber: FC<NumberInputProps> = props => {
       </div>
     </div>
   )
-}
+})

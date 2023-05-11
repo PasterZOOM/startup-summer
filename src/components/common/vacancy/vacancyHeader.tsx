@@ -6,24 +6,17 @@ import { Paper } from '@/components/common/ui/wrappers/paper'
 import { Location } from '@/components/common/vacancy/common/location'
 import { Salary } from '@/components/common/vacancy/common/salary'
 import { VacancyTitle } from '@/components/common/vacancy/common/vacancyTitle'
-import { useToggleFavorite } from '@/hooks/useToggleFavorite'
 
 type PropsType = {
   vacancy: VacancyType
 }
 export const VacancyHeader: FC<PropsType> = ({ vacancy }) => {
-  const { inFavorite, onFavoriteStareClick } = useToggleFavorite(vacancy)
-
   return (
     <Paper className="p-4 md:p-6">
       <div className="space-y-4">
         <div className="flex items-start justify-between gap-4">
           <VacancyTitle className="text-title-l font-bold">{vacancy.profession}</VacancyTitle>
-          <FavoriteStare
-            data-elem={`vacancy-${vacancy.id}-shortlist-button`}
-            isChecked={inFavorite}
-            onClick={onFavoriteStareClick}
-          />
+          <FavoriteStare vacancy={vacancy} />
         </div>
         <div className="flex flex-col gap-3 text-title-s md:flex-row">
           <Salary

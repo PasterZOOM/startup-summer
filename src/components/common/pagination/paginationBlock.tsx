@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 import { Pagination } from '@mantine/core'
 import { useRouter } from 'next/router'
@@ -9,7 +9,7 @@ import { TABLET_WIDTH, useWindowSize } from '@/hooks/useWindowSize'
 import { selectPage, selectPageCount, useParamsStore } from '@/stores/useParamsStore'
 import { countTotalPages } from '@/utils/countTotalPages'
 
-export const PaginationBlock: FC = () => {
+export const PaginationBlock: FC = memo(() => {
   const { query, replace, pathname } = useRouter()
   const { width } = useWindowSize()
 
@@ -48,4 +48,4 @@ export const PaginationBlock: FC = () => {
       />
     </div>
   )
-}
+})

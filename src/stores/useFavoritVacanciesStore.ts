@@ -33,6 +33,10 @@ export const useFavoriteVacanciesStore = create(
 )
 
 export const selectVacancies = (store: StoreType): Record<string, VacancyType> => store.vacancies
+export const selectIsFavorite =
+  (id: number) =>
+  (store: StoreType): boolean =>
+    !!store.vacancies[id]
 export const selectAddVacancy = (store: StoreType): SetAddVacancyFnType => store.addVacancy
 export const selectRemoveVacancy = (store: StoreType): SetRemoveVacancyFnType => store.removeVacancy
 

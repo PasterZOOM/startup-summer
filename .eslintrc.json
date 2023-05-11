@@ -120,6 +120,7 @@
         ]
       }
     ],
+    "react/display-name": "off",
     "no-debugger": "warn",
     "prettier/prettier": [
       "error",
