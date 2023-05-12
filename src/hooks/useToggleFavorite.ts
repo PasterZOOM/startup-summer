@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, MouseEvent } from 'react'
+import { ChangeEvent, useState, MouseEvent, KeyboardEvent } from 'react'
 
 import { VacancyType } from '@/api/vacancies/types'
 import {
@@ -12,7 +12,7 @@ export const useToggleFavorite = (
   vacancy: VacancyType
 ): {
   inFavorite: boolean
-  onFavoriteStareClick: (e: MouseEvent | ChangeEvent) => void
+  onFavoriteStareClick: (e: MouseEvent | ChangeEvent | KeyboardEvent) => void
 } => {
   const addVacancy = useFavoriteVacanciesStore(selectAddVacancy)
   const removeVacancy = useFavoriteVacanciesStore(selectRemoveVacancy)
@@ -21,7 +21,7 @@ export const useToggleFavorite = (
     useFavoriteVacanciesStore(selectIsFavorite(vacancy.id))
   )
 
-  const onFavoriteStareClick = (e: MouseEvent | ChangeEvent): void => {
+  const onFavoriteStareClick = (e: MouseEvent | ChangeEvent | KeyboardEvent): void => {
     if (inFavorite) {
       removeVacancy(vacancy.id)
       setInFavorite(false)

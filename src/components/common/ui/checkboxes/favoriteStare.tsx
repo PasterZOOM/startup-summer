@@ -1,4 +1,4 @@
-import { FC, MouseEvent } from 'react'
+import { FC, KeyboardEvent } from 'react'
 
 import { VacancyType } from '@/api/vacancies/types'
 import { StarIcon } from '@/components/svg/starIcon'
@@ -11,12 +11,14 @@ type PropsType = {
 export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
   const { inFavorite, onFavoriteStareClick } = useToggleFavorite(vacancy)
 
-  const onDivClick = (e: MouseEvent): void => {
-    onFavoriteStareClick(e)
+  const onKeyEnter = (e: KeyboardEvent): void => {
+    if (e.key === 'Enter') {
+      onFavoriteStareClick(e)
+    }
   }
 
   return (
-    <div onClick={onDivClick} aria-hidden>
+    <div onClick={onFavoriteStareClick} onKeyDown={onKeyEnter} aria-hidden>
       <input
         data-elem={`vacancy-${vacancy.id}-shortlist-button`}
         type="checkbox"
