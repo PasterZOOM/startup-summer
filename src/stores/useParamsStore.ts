@@ -27,7 +27,13 @@ const initialState: StateType = {
 
 export const useParamsStore = create<StoreType>(set => ({
   ...initialState,
-  setQueryParams: params => set(params),
+  setQueryParams: params => {
+    if (JSON.stringify(params) === '{}') {
+      set(initialState)
+    } else {
+      set({ ...initialState, ...params })
+    }
+  },
   clearQueryParams: () => set(initialState),
   setKeyword: keyword => set({ keyword }),
   setPaymentFrom: payment_from => set({ payment_from }),
