@@ -47,6 +47,7 @@
     }
   ],
   "rules": {
+    "camelcase": "off",
     "no-shadow": "off",
     "@typescript-eslint/no-shadow": "warn",
     "import/extensions": "off",

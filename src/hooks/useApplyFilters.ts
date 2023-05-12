@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { ParamsKey } from '@/api/vacancies/types'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
+import { getQueryParamsFromParams } from '@/utils/getQueryParamsFromParams'
 
 export const useApplyFilters = (): (() => void) => {
   const { refetch } = useGetAllVacancies()
@@ -12,11 +12,7 @@ export const useApplyFilters = (): (() => void) => {
   const [params] = useParamsStore(selectParamsState)
 
   const applyFilters = async (): Promise<void> => {
-    const queryParams: Partial<Record<ParamsKey, string | []>> = {}
-
-    Object.entries(params).forEach(([key, value]) => {
-      queryParams[key as keyof typeof queryParams] = !value || value === '0' ? [] : value
-    })
+    const queryParams = getQueryParamsFromParams(params)
 
     await replace({ pathname, query: { ...queryParams, page: [] } }, undefined, {
       shallow: true,

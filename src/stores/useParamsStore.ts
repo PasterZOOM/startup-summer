@@ -2,7 +2,7 @@ import { create } from 'zustand'
 
 import { GetVacanciesParamsType } from '@/api/vacancies/types'
 
-type StateType = { params: GetVacanciesParamsType }
+type StateType = GetVacanciesParamsType
 type ActionsType = {
   setQueryParams: SetQueryParamsFnType
   clearQueryParams: ClearQueryParamsFnType
@@ -16,43 +16,44 @@ type ActionsType = {
 type StoreType = ActionsType & StateType
 
 const initialState: StateType = {
-  params: {},
+  page: undefined,
+  payment_to: undefined,
+  count: '4',
+  catalogues: undefined,
+  keyword: undefined,
+  payment_from: undefined,
+  no_agreement: undefined,
 }
 
-export const useParamsStore = create<StoreType>((set, get) => ({
+export const useParamsStore = create<StoreType>(set => ({
   ...initialState,
-  setQueryParams: params => set({ params }),
+  setQueryParams: params => set(params),
   clearQueryParams: () => set(initialState),
-  setKeyword: keyword => set({ params: { ...get().params, keyword } }),
-  setPaymentFrom: paymentFrom => set({ params: { ...get().params, payment_from: paymentFrom } }),
-  setPaymentTo: paymentTo => set({ params: { ...get().params, payment_to: paymentTo } }),
-  setCatalogues: catalogues => set({ params: { ...get().params, catalogues } }),
-  setPageCount: count => set({ params: { ...get().params, count } }),
-  setPage: page => set({ params: { ...get().params, page } }),
+  setKeyword: keyword => set({ keyword }),
+  setPaymentFrom: payment_from => set({ payment_from }),
+  setPaymentTo: payment_to => set({ payment_to }),
+  setCatalogues: catalogues => set({ catalogues }),
+  setPageCount: count => set({ count }),
+  setPage: page => set({ page }),
 }))
 
-export const selectParamsState: StateSelectorType<GetVacanciesParamsType> = store => [
-  store.params,
-  store.setQueryParams,
-]
-export const selectKeywordState: StateSelectorType = store => [
-  store.params.keyword,
-  store.setKeyword,
-]
+export const selectParamsState: StateSelectorType<StateType> = ({
+  payment_from,
+  payment_to,
+  keyword,
+  catalogues,
+  page,
+  ...store
+}) => [{ payment_from, page, keyword, payment_to, catalogues }, store.setQueryParams]
+export const selectKeywordState: StateSelectorType = store => [store.keyword, store.setKeyword]
 export const selectPaymentFrom: StateSelectorType = store => [
-  store.params.payment_from,
+  store.payment_from,
   store.setPaymentFrom,
 ]
-export const selectPaymentTo: StateSelectorType = store => [
-  store.params.payment_to,
-  store.setPaymentTo,
-]
-export const selectCatalogues: StateSelectorType = store => [
-  store.params.catalogues,
-  store.setCatalogues,
-]
-export const selectPageCount: StateSelectorType = store => [store.params.count, store.setPageCount]
-export const selectPage: StateSelectorType = store => [store.params.page, store.setPage]
+export const selectPaymentTo: StateSelectorType = store => [store.payment_to, store.setPaymentTo]
+export const selectCatalogues: StateSelectorType = store => [store.catalogues, store.setCatalogues]
+export const selectPageCount: StateSelectorType = store => [store.count, store.setPageCount]
+export const selectPage: StateSelectorType = store => [store.page, store.setPage]
 
 export const selectClearParams = (store: StoreType): ClearQueryParamsFnType =>
   store.clearQueryParams
