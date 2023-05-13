@@ -3,6 +3,7 @@ import { FC } from 'react'
 import { useTranslation } from 'next-i18next'
 
 import { InputNumber } from '@/components/common/ui/inputs/inputNumber'
+import { PAYMENT_STEP } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { selectPaymentFrom, selectPaymentTo, useParamsStore } from '@/stores/useParamsStore'
 
@@ -25,18 +26,18 @@ export const InputsBlock: FC = () => {
         value={Number(paymentFrom) || ''}
         onChange={value => setPaymentFrom(value.toString())}
         max={Number(paymentTo) || undefined}
-        min={0}
+        min={PAYMENT_STEP}
         disabled={!vacancies}
-        step={500}
+        step={PAYMENT_STEP}
       />
       <InputNumber
         data-elem="salary-to-input"
         placeholder={toPlaceholder}
         value={Number(paymentTo) || ''}
         onChange={value => setPaymentTo(value.toString())}
-        min={paymentFrom ? Number(paymentFrom) : 0}
+        min={paymentFrom ? Number(paymentFrom) : PAYMENT_STEP}
         disabled={!vacancies}
-        step={500}
+        step={PAYMENT_STEP}
       />
     </>
   )

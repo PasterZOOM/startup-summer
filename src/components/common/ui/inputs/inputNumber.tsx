@@ -26,12 +26,12 @@ export const InputNumber = memo((props: NumberInputProps) => {
         <div className="absolute bottom-0 right-0 top-0 flex cursor-pointer flex-col justify-center">
           <InputNumberButton
             onClick={incrementHandler}
-            disabled={disabled || (!!value && !!max && +value >= +max)}
+            disabled={!!value && !!max && +value >= +max}
           />
           <InputNumberButton
             onClick={decrementHandler}
             isDecrement
-            disabled={disabled || (!!value && !!min && +value <= +min) || !value}
+            disabled={(!!value && !!min && +value <= +min) || !value}
           />
         </div>
       )}
