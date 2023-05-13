@@ -1,43 +1,56 @@
-import { FC, KeyboardEvent } from 'react'
+import { ChangeEvent, FC, KeyboardEvent, MouseEvent, useRef } from 'react'
 
 import { VacancyType } from '@/api/vacancies/types'
 import { StarIcon } from '@/components/svg/starIcon'
-import { useToggleFavorite } from '@/hooks/useToggleFavorite'
+import {
+  selectAddVacancy,
+  selectIsFavorite,
+  selectRemoveVacancy,
+  useFavoriteVacanciesStore,
+} from '@/stores/useFavoritVacanciesStore'
 
 type PropsType = {
   vacancy: VacancyType
 }
 
 export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
-  const { inFavorite, onFavoriteStareClick } = useToggleFavorite(vacancy)
+  const ref = useRef<HTMLInputElement>(null)
 
-  const onKeyEnter = (e: KeyboardEvent): void => {
-    if (e.key === 'Enter') {
-      onFavoriteStareClick(e)
+  const addVacancy = useFavoriteVacanciesStore(selectAddVacancy)
+  const removeVacancy = useFavoriteVacanciesStore(selectRemoveVacancy)
+
+  const inFavorite = useFavoriteVacanciesStore(selectIsFavorite(vacancy.id))
+
+  const onKeyStar = (e: ChangeEvent | MouseEvent | KeyboardEvent): void => {
+    if (ref.current) {
+      if (ref.current.checked) {
+        removeVacancy(vacancy.id)
+      } else {
+        addVacancy(vacancy)
+      }
+      e.preventDefault()
     }
   }
 
   return (
     <div
-      onClick={e => {
-        onFavoriteStareClick(e)
-      }}
-      onMouseDown={e => e.preventDefault()}
-      onKeyDown={onKeyEnter}
       aria-hidden
-      className="flex cursor-pointer items-center justify-center"
+      onClick={onKeyStar}
+      onKeyDown={e => e.key === 'Enter' && onKeyStar(e)}
+      className="flex cursor-pointer items-center justify-center focus:outline-offset-2 focus:outline-blue-500"
+      role="button"
+      tabIndex={0}
+      data-elem={`vacancy-${vacancy.id}-shortlist-button`}
     >
       <input
-        data-elem={`vacancy-${vacancy.id}-shortlist-button`}
         type="checkbox"
-        value={inFavorite.toString()}
         checked={inFavorite}
-        onChange={onFavoriteStareClick}
+        onChange={onKeyStar}
         className="absolute opacity-0"
         tabIndex={-1}
+        ref={ref}
       />
       <StarIcon
-        tabIndex={0}
         className={`relative transition hover:text-blue-400 focus:outline-offset-2 focus:outline-blue-500 ${
           inFavorite ? 'fill-blue-main-500 text-blue-main-500 ' : 'text-gray-500 '
         }`}
