@@ -27,7 +27,7 @@ export const FiltersBlock: FC = () => {
   const applyButtonTitle = t('applyButtonTitle', 'Принять')
 
   return (
-    <Paper className="m-auto max-w-193.25 space-y-8 p-4 lg:w-78.75">
+    <Paper className="m-auto max-w-193.25 select-none space-y-8 p-4 lg:w-78.75">
       <div className="flex items-center justify-between">
         <span className="text-title-s font-bold">{filtersTitle}</span>
         <ClearFiltersButton />

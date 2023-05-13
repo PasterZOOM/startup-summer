@@ -3,19 +3,18 @@ import { memo, useRef } from 'react'
 import { NumberInput, NumberInputHandlers } from '@mantine/core'
 import { NumberInputProps } from '@mantine/core/lib/NumberInput/NumberInput'
 
-import { NumberInputArrayIcon } from '@/components/svg/numberInputArrayIcon'
+import { InputNumberButton } from '@/components/common/ui/inputs/inputNumberButton'
 
 export const InputNumber = memo((props: NumberInputProps) => {
   const handlers = useRef<NumberInputHandlers>()
-  const { disabled } = props
-
+  const { disabled, value, max, min } = props
   const incrementHandler = (): void => {
     if (!disabled) {
       handlers.current?.increment()
     }
   }
   const decrementHandler = (): void => {
-    if (!disabled) {
+    if (!disabled && value) {
       handlers.current?.decrement()
     }
   }
@@ -23,10 +22,19 @@ export const InputNumber = memo((props: NumberInputProps) => {
   return (
     <div className="relative">
       <NumberInput hideControls radius="md" size="md" handlersRef={handlers} {...props} />
-      <div className="absolute right-3 top-2.25">
-        <NumberInputArrayIcon onClick={incrementHandler} />
-        <NumberInputArrayIcon className="rotate-180" onClick={decrementHandler} />
-      </div>
+      {!disabled && (
+        <div className="absolute bottom-0 right-0 top-0 flex cursor-pointer flex-col justify-center">
+          <InputNumberButton
+            onClick={incrementHandler}
+            disabled={disabled || (!!value && !!max && +value >= +max)}
+          />
+          <InputNumberButton
+            onClick={decrementHandler}
+            isDecrement
+            disabled={disabled || (!!value && !!min && +value <= +min) || !value}
+          />
+        </div>
+      )}
     </div>
   )
 })

@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC, memo, useState } from 'react'
 
 import { Select } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
@@ -14,6 +14,8 @@ export const CatalogsSelect: FC = memo(() => {
   const { t } = useTranslation('filters')
   const { width } = useWindowSize()
 
+  const [isOpen, setIsOpen] = useState(false)
+
   const { data: catalogs = [] } = useGetCatalogs()
   const { data: vacancies } = useGetAllVacancies()
 
@@ -27,11 +29,15 @@ export const CatalogsSelect: FC = memo(() => {
     <Select
       data-elem="industry-select"
       placeholder={chooseIndustryPlaceholder}
-      rightSection={<SelectArrayIcon />}
+      rightSection={
+        <SelectArrayIcon className={`transition ${isOpen ? 'rotate-180 text-gray-500' : ''}}`} />
+      }
       rightSectionWidth={36}
       radius="md"
       size="md"
       searchable
+      onDropdownOpen={() => setIsOpen(true)}
+      onDropdownClose={() => setIsOpen(false)}
       styles={{
         rightSection: { pointerEvents: 'none', paddingRight: '12px' },
       }}
