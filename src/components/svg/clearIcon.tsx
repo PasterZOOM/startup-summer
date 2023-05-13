@@ -15,7 +15,7 @@ export const ClearIcon: FC<PropsType> = ({
 }) => {
   return (
     <svg
-      className={`${className} group-hover:stroke-blue-main-500`}
+      className={`${className} group-hover:stroke-blue-400 group-active:stroke-blue-main-500`}
       width={width}
       height={height}
       viewBox="0 0 16 16"

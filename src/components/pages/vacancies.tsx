@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
-import { PaginationBlock } from '@/components/common/pagination/paginationBlock'
+import { FiltersPagination } from '@/components/common/pagination/filtersPagination'
 import { CustomLoader } from '@/components/common/ui/customLoader'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
@@ -41,7 +41,7 @@ export const Vacancies: FC = () => {
           )}
         </div>
 
-        {data && <PaginationBlock />}
+        {data && <FiltersPagination />}
       </MainContainer>
     </div>
   )

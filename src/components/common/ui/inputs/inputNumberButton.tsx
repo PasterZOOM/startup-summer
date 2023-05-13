@@ -17,7 +17,7 @@ export const InputNumberButton: FC<PropsType> = ({ onClick, isDecrement, disable
       aria-hidden
     >
       <NumberInputArrayIcon
-        className={`transition group-hover:scale-125 group-active:scale-100 ${
+        className={`transition group-hover:text-blue-400 group-active:text-blue-main-500 ${
           isDecrement ? 'rotate-180' : ''
         } ${disabled ? 'text-gray-200' : 'text-gray-500'}`}
       />

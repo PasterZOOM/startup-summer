@@ -19,7 +19,10 @@ export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
 
   return (
     <div
-      onClick={onFavoriteStareClick}
+      onClick={e => {
+        onFavoriteStareClick(e)
+      }}
+      onMouseDown={e => e.preventDefault()}
       onKeyDown={onKeyEnter}
       aria-hidden
       className="flex cursor-pointer items-center justify-center"
@@ -35,10 +38,8 @@ export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
       />
       <StarIcon
         tabIndex={0}
-        className={`relative transition hover:fill-blue-400 hover:text-blue-400 focus:outline-0 focus:hover:fill-blue-400 ${
-          inFavorite
-            ? 'fill-blue-main-500 text-blue-main-500 focus:fill-blue-600 focus:text-blue-600'
-            : 'text-gray-500 focus:text-blue-main-500'
+        className={`relative transition hover:text-blue-400 focus:outline-offset-2 focus:outline-blue-500 ${
+          inFavorite ? 'fill-blue-main-500 text-blue-main-500 ' : 'text-gray-500 '
         }`}
       />
     </div>

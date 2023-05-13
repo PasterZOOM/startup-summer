@@ -42,3 +42,7 @@ p {
     -ms-transform: rotate(3deg) translate(0px, -4px);
     transform: rotate(3deg) translate(0px, -4px);
 }
+
+.pagination button, .pagination[type='button'] {
+    background-color: white;
+}

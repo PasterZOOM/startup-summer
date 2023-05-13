@@ -1,8 +1,9 @@
 import { ChangeEventHandler, FC, KeyboardEventHandler } from 'react'
 
-import { Button, Input } from '@mantine/core'
+import { Input } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
 
+import { MainButton } from '@/components/common/ui/buttons/mainButton'
 import { SearchIcon } from '@/components/svg/searchIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
@@ -32,24 +33,21 @@ export const SearchInput: FC = () => {
       data-elem="search-input"
       icon={<SearchIcon />}
       radius="md"
-      styles={{ input: { height: '48px' } }}
       placeholder={searchPlaceholder}
       rightSection={
-        <Button
-          data-elem="search-button"
-          radius="md"
-          className="bg-blue-main-500"
-          onClick={applyFilters}
-          disabled={!vacancies}
-        >
+        <MainButton onClick={applyFilters} disabled={!vacancies}>
           {searchButtonTitle}
-        </Button>
+        </MainButton>
       }
       rightSectionWidth={95}
       value={keyword}
       onChange={onChangeInputValue}
       onKeyDown={onKeyDownEnter}
       disabled={!vacancies}
+      sx={{
+        input: { height: '48px' },
+        '&:hover': { 'input:not(:disabled)': { border: '1px solid #5E96FC' } },
+      }}
     />
   )
 }

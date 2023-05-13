@@ -1,11 +1,11 @@
 import { FC } from 'react'
 
-import { Button } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
 
 import { FilterWrapper } from '@/components/common/filters/filterWrapper'
 import { InputsBlock } from '@/components/common/filters/inputsBlock'
 import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersButton'
+import { MainButton } from '@/components/common/ui/buttons/mainButton'
 import { CatalogsSelect } from '@/components/common/ui/selects/catalogsSelect'
 import { Paper } from '@/components/common/ui/wrappers/paper'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
@@ -42,16 +42,9 @@ export const FiltersBlock: FC = () => {
           <InputsBlock />
         </FilterWrapper>
 
-        <Button
-          data-elem="search-button"
-          radius="md"
-          size="md"
-          className="w-full bg-blue-main-500"
-          onClick={applyFilters}
-          disabled={!vacancies}
-        >
+        <MainButton size="md" className="w-full" onClick={applyFilters} disabled={!vacancies}>
           {applyButtonTitle}
-        </Button>
+        </MainButton>
       </div>
     </Paper>
   )

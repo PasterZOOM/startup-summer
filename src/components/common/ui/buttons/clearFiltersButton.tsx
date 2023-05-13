@@ -26,7 +26,7 @@ export const ClearFiltersButton = memo(() => {
       variant="white"
       radius="md"
       compact
-      className="group p-0 text-sub-title text-gray-500 transition hover:text-blue-main-500 disabled:bg-transparent"
+      className="group p-0 text-sub-title text-gray-500 transition hover:text-blue-400 active:text-blue-main-500 disabled:bg-transparent"
       rightIcon={<ClearIcon />}
       onClick={onButtonClick}
       disabled={!vacancies}

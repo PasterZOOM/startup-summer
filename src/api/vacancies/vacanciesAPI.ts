@@ -5,14 +5,18 @@ import { REQUEST_PATHS } from '@/enums/paths'
 
 export const vacanciesAPI = {
   getVacancies: (params?: GetVacanciesParamsType) => {
-    const temp = { ...params }
+    let temp: GetVacanciesParamsType = { ...params }
 
     const checkPayment = (): boolean => {
       return !!temp.payment_from || !!temp.payment_to
     }
 
     if (checkPayment()) {
-      temp.no_agreement = '1'
+      temp = { ...temp, no_agreement: '1' }
+    }
+
+    if (temp.page) {
+      temp = { ...temp, page: (+temp.page - 1).toString() }
     }
 
     return instance

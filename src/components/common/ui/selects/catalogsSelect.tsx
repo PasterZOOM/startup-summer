@@ -30,7 +30,9 @@ export const CatalogsSelect: FC = memo(() => {
       data-elem="industry-select"
       placeholder={chooseIndustryPlaceholder}
       rightSection={
-        <SelectArrayIcon className={`transition ${isOpen ? 'rotate-180 text-gray-500' : ''}}`} />
+        <SelectArrayIcon
+          className={`transition ${isOpen ? 'rotate-180 text-blue-main-500' : 'text-gray-500'}`}
+        />
       }
       rightSectionWidth={36}
       radius="md"
@@ -39,7 +41,14 @@ export const CatalogsSelect: FC = memo(() => {
       onDropdownOpen={() => setIsOpen(true)}
       onDropdownClose={() => setIsOpen(false)}
       styles={{
+        dropdown: { borderRadius: '8px' },
+        input: { '&:hover:not(:disabled)': { border: '1px solid #5E96FC' } },
         rightSection: { pointerEvents: 'none', paddingRight: '12px' },
+        item: {
+          borderRadius: '8px',
+          '&[data-hovered]': { background: '#DEECFF' },
+          '&[data-selected], &[data-selected]:hover': { background: '#5E96FC' },
+        },
       }}
       data={catalogs?.map(el => ({
         value: el.key.toString(),

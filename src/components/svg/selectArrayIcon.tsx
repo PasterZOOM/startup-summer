@@ -24,7 +24,7 @@ export const SelectArrayIcon: FC<PropsType> = ({
     >
       <path
         d="M5 9L11.2191 14.3306C11.6684 14.7158 12.3316 14.7158 12.7809 14.3306L19 9"
-        stroke="#ACADB9"
+        stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
