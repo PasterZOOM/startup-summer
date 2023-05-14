@@ -36,6 +36,7 @@ const App = ({ Component, pageProps }: AppPropsWithLayout): JSX.Element => {
     <>
       <Head>
         <title>Startup Summer</title>
+        <link rel="icon" href="/favicon.svg" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
         <meta property="og:url" content="https://startup-summer-lemon.vercel.app/" key="og:url" />
         <meta property="og:type" content="website" />
