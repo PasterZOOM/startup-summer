@@ -2,7 +2,7 @@ import { FC, memo } from 'react'
 
 import { useRouter } from 'next/router'
 
-import { MainPagination } from '@/components/common/pagination/mainPagination'
+import { MainPagination } from '@/components/common/ui/pagination/mainPagination'
 import { DEFAULT_PAGE_COUNT, MAX_RESPONSE_ITEMS } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { selectPage, selectPageCount, useParamsStore } from '@/stores/useParamsStore'

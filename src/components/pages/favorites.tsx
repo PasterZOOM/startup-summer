@@ -3,7 +3,7 @@ import { FC, useEffect, useState } from 'react'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
 
-import { MainPagination } from '@/components/common/pagination/mainPagination'
+import { MainPagination } from '@/components/common/ui/pagination/mainPagination'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
 import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
 import { DEFAULT_PAGE_COUNT } from '@/constatnts/constants'

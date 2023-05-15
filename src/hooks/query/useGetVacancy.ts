@@ -4,7 +4,7 @@ import { AuthErrorType } from '@/api/auth/types'
 import { VacancyType } from '@/api/vacancies/types'
 import { vacanciesAPI } from '@/api/vacancies/vacanciesAPI'
 import { QUERY_KEY } from '@/enums/queryKeys'
-import { useAuthError } from '@/hooks/query/useAuthError'
+import { useAuthError } from '@/hooks/useAuthError'
 
 export const useGetVacancy = (id: string): UseQueryResult<VacancyType, AuthErrorType> => {
   const handleAuthError = useAuthError()

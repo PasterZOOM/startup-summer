@@ -30,7 +30,7 @@ const Header: FC = () => {
   return (
     <div
       className={`${
-        isVisible ? 'top-0' : '-top-20'
+        isVisible ? 'top-0' : '-top-21'
       } sticky z-30 transform bg-white px-3 py-6 duration-300 md:px-10`}
     >
       <div className="mx-auto flex max-w-279 items-center justify-between">

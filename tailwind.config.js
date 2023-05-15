@@ -9,6 +9,7 @@ module.exports = {
         30: '7.5rem', // 120px
         35.25: '8.8125rem', // 141px
         78.75: '19.6875rem', // 315px
+        21: '5.25rem', // 84px
         125: '31.25rem', // 500px
       },
       maxWidth: {
