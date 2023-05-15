@@ -1,3 +1,6 @@
+import { AxiosHeaders, RawAxiosRequestHeaders } from 'axios'
+
+import { AuthResponseType } from '@/api/auth/types'
 import { instance } from '@/api/instance'
 import { GetVacanciesParamsType, VacanciesResponseType, VacancyType } from '@/api/vacancies/types'
 import { DEFAULT_PAGE_COUNT } from '@/constatnts/constants'
@@ -18,9 +21,22 @@ export const vacanciesAPI = {
     if (temp.page) {
       temp = { ...temp, page: (+temp.page - 1).toString() }
     }
+    const headers: RawAxiosRequestHeaders | AxiosHeaders = {}
+
+    if (typeof window !== 'undefined') {
+      const authData = localStorage.getItem('auth')
+
+      if (authData) {
+        const { access_token: accessToken, token_type: tokenType }: AuthResponseType =
+          JSON.parse(authData).state
+
+        headers.Authorization = `${tokenType} ${accessToken}`
+      }
+    }
 
     return instance
       .get<VacanciesResponseType>(REQUEST_PATHS.VACANCIES, {
+        headers,
         params: { published: '1', count: DEFAULT_PAGE_COUNT.toString(), ...temp },
       })
       .then(res => res.data)

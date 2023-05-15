@@ -1,10 +1,10 @@
 import { AuthResponseType } from '@/api/auth/types'
-import { authInstance } from '@/api/authInstance'
+import { instance } from '@/api/instance'
 import { REQUEST_PATHS } from '@/enums/paths'
 
 export const authAPI = {
   byPassword: () =>
-    authInstance
+    instance
       .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}/password`, {
         params: {
           login: process.env.NEXT_PUBLIC_LOGIN,
@@ -16,7 +16,7 @@ export const authAPI = {
       })
       .then(res => res.data),
   refreshToken: (token: string) =>
-    authInstance
+    instance
       .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}/refresh_token`, {
         params: {
           refresh_token: token,
