@@ -5,7 +5,7 @@ import { REQUEST_PATHS } from '@/enums/paths'
 export const authAPI = {
   byPassword: () =>
     instance
-      .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}/password`, {
+      .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}password/`, {
         params: {
           login: process.env.NEXT_PUBLIC_LOGIN,
           password: process.env.NEXT_PUBLIC_PASSWORD,
@@ -17,7 +17,7 @@ export const authAPI = {
       .then(res => res.data),
   refreshToken: (token: string) =>
     instance
-      .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}/refresh_token`, {
+      .get<AuthResponseType>(`${REQUEST_PATHS.AUTH}refresh_token/`, {
         params: {
           refresh_token: token,
           client_id: process.env.NEXT_PUBLIC_CLIENT_ID,

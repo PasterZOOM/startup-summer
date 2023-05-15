@@ -3,7 +3,7 @@ export enum ROUT_PATHS {
   FAVORITES = '/favorites',
 }
 export enum REQUEST_PATHS {
-  AUTH = '/oauth2',
-  CATALOGUES = '/catalogues',
+  AUTH = '/oauth2/',
+  CATALOGUES = '/catalogues/',
   VACANCIES = '/vacancies/',
 }
