@@ -1,6 +1,6 @@
 {
-  "favoritesTitle": "Favorites",
-  "notFoundButtonTitle": "Job search",
-  "notFoundMessage": "Oops, nothing here yet!",
-  "vacanciesTitle": "Job search"
+  "favoritesTitle": "Избранное",
+  "notFoundButtonTitle": "Поиск Вакансий",
+  "notFoundMessage": "Упс, здесь еще ничего нет!",
+  "vacanciesTitle": "Поиск Вакансий"
 }

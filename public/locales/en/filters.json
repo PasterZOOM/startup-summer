@@ -1,12 +1,12 @@
 {
-  "applyButtonTitle": "Apply",
-  "chooseIndustryPlaceholder": "Choose an industry",
-  "resetAllButtonTitle": "Reset all",
-  "filtersTitle": "Filters",
-  "fromPlaceholder": "From",
-  "industryTitle": "Industry",
-  "salaryTitle": "Salary",
-  "searchButtonTitle": "Search",
-  "searchPlaceholder": "Enter job title",
-  "toPlaceholder": "To"
+  "applyButtonTitle": "Применить",
+  "chooseIndustryPlaceholder": "Выберете отрасль",
+  "resetAllButtonTitle": "Сбросить все",
+  "filtersTitle": "Фильтры",
+  "fromPlaceholder": "От",
+  "industryTitle": "Отрасль",
+  "salaryTitle": "Оклад",
+  "searchButtonTitle": "Поиск",
+  "searchPlaceholder": "Введите название вакансии",
+  "toPlaceholder": "До"
 }
