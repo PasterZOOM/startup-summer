@@ -1,5 +1,7 @@
 import { FC, ReactNode } from 'react'
 
+import Link from 'next/link'
+
 import { LocationIcon } from '@/components/svg/locationIcon'
 
 type PropsType = {
@@ -9,15 +11,16 @@ type PropsType = {
 
 export const Location: FC<PropsType> = ({ className = '', children }) => {
   return (
-    <div
+    <Link
+      href={`https://www.google.com/maps/place/${children}`}
       className={`group flex w-fit items-center gap-2 focus:outline-0 ${className}`}
-      tabIndex={0}
-      role="button"
+      onClick={e => e.stopPropagation()}
+      target="_blank"
     >
       <LocationIcon className="text-gray-600 transition group-hover:text-blue-main-500 group-focus:text-blue-main-500" />
       <div className="transition group-hover:text-blue-main-500 group-focus:text-blue-main-500">
         {children}
       </div>
-    </div>
+    </Link>
   )
 }
