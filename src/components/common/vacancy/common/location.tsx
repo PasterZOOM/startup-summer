@@ -10,7 +10,7 @@ type PropsType = {
 export const Location: FC<PropsType> = ({ className = '', children }) => {
   return (
     <div
-      className={`group flex w-fit gap-2  focus:outline-0 ${className}`}
+      className={`group flex w-fit items-center gap-2 focus:outline-0 ${className}`}
       tabIndex={0}
       role="button"
     >

@@ -10,7 +10,7 @@ import { getQueryParamsFromParams } from '@/utils/getQueryParamsFromParams'
 export const VacanciesLink: FC = () => {
   const { t } = useTranslation('common')
 
-  const vacanciesTitle = t('vacanciesTitle', 'Поиск Вакансий')
+  const vacanciesTitle = t('vacanciesTitle')
   const [params] = useParamsStore(selectParamsState)
 
   return (

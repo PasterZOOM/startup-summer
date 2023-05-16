@@ -8,7 +8,7 @@ import { ROUT_PATHS } from '@/enums/paths'
 export const FavoritesLink: FC = () => {
   const { t } = useTranslation('common')
 
-  const favoritesTitle = t('favoritesTitle', 'Избранное')
+  const favoritesTitle = t('favoritesTitle')
 
   return <HeaderLinks href={{ pathname: ROUT_PATHS.FAVORITES }}>{favoritesTitle}</HeaderLinks>
 }

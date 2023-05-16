@@ -24,8 +24,8 @@ export const NotFound: FC = () => {
     await push(ROUT_PATHS.VACANCIES)
   }
 
-  const notFoundMessage = t('notFoundMessage', 'Упс, здесь еще ничего нет!')
-  const notFoundButtonTitle = t('notFoundButtonTitle', 'Поиск Вакансий')
+  const notFoundMessage = t('notFoundMessage')
+  const notFoundButtonTitle = t('notFoundButtonTitle')
 
   useEffect(() => {
     clearParams()
@@ -39,7 +39,6 @@ export const NotFound: FC = () => {
         <Button
           variant="light"
           radius="md"
-          size="md"
           className={`bg-blue-100 px-6 py-0.5 text-sm ${openSans.className}`}
           onClick={onButtonClick}
         >

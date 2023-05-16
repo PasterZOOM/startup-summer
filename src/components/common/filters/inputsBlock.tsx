@@ -12,8 +12,8 @@ export const InputsBlock: FC = () => {
   const [paymentFrom, setPaymentFrom] = useParamsStore(selectPaymentFrom)
   const [paymentTo, setPaymentTo] = useParamsStore(selectPaymentTo)
 
-  const fromPlaceholder = t('fromPlaceholder', 'До')
-  const toPlaceholder = t('toPlaceholder', 'От')
+  const fromPlaceholder = t('fromPlaceholder')
+  const toPlaceholder = t('toPlaceholder')
 
   return (
     <>

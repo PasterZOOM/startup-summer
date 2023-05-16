@@ -52,7 +52,7 @@ export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
       />
       <StarIcon
         className={`relative transition hover:text-blue-400 focus:outline-offset-2 focus:outline-blue-500 ${
-          inFavorite ? 'fill-blue-main-500 text-blue-main-500 ' : 'text-gray-500 '
+          inFavorite ? 'fill-blue-main-500 text-blue-main-500' : 'text-gray-500'
         }`}
       />
     </div>

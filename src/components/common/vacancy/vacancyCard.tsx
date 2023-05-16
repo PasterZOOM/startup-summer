@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { memo } from 'react'
 
 import Link from 'next/link'
 
@@ -13,7 +13,7 @@ import { ROUT_PATHS } from '@/enums/paths'
 type PropsType = {
   vacancy: VacancyType
 }
-export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
+export const VacancyCard = memo(({ vacancy }: PropsType) => {
   return (
     <Link
       data-elem={`vacancy-${vacancy.id}`}
@@ -43,4 +43,4 @@ export const VacancyCard: FC<PropsType> = ({ vacancy }) => {
       </Paper>
     </Link>
   )
-}
+})

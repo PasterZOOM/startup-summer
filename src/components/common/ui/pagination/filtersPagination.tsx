@@ -37,7 +37,7 @@ export const FiltersPagination: FC = memo(() => {
   if (total <= DEFAULT_PAGE_COUNT) return null
 
   return (
-    <div className="flex justify-center">
+    <div className="mx-auto w-fit pb-2 md:pb-5 lg:pb-10">
       <MainPagination page={+(page ?? 1)} total={total} onChange={onPaginationChange} />
     </div>
   )

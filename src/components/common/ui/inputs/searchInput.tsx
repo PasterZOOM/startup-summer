@@ -1,4 +1,4 @@
-import { ChangeEventHandler, FC, KeyboardEventHandler } from 'react'
+import { ChangeEventHandler, FC, KeyboardEventHandler, memo } from 'react'
 
 import { Input } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
@@ -9,7 +9,7 @@ import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
 import { selectKeywordState, useParamsStore } from '@/stores/useParamsStore'
 
-export const SearchInput: FC = () => {
+export const SearchInput: FC = memo(() => {
   const { t } = useTranslation('filters')
 
   const [keyword = '', setKeyword] = useParamsStore(selectKeywordState)
@@ -25,8 +25,8 @@ export const SearchInput: FC = () => {
     setKeyword(e.currentTarget.value)
   }
 
-  const searchButtonTitle = t('searchButtonTitle', 'Поиск')
-  const searchPlaceholder = t('searchPlaceholder', 'Введите название вакансии')
+  const searchButtonTitle = t('searchButtonTitle')
+  const searchPlaceholder = t('searchPlaceholder')
 
   return (
     <Input
@@ -50,4 +50,4 @@ export const SearchInput: FC = () => {
       }}
     />
   )
-}
+})

@@ -23,7 +23,7 @@ export const CatalogsSelect: FC = memo(() => {
   const checkWidth = (): boolean => {
     return width < MIN_WIDTH_FOR_FULL_TITLE || width > MAX_WIDTH_FOR_FULL_TITLE
   }
-  const chooseIndustryPlaceholder = t('chooseIndustryPlaceholder', 'Выберете отрасль')
+  const chooseIndustryPlaceholder = t('chooseIndustryPlaceholder')
 
   return (
     <Select
@@ -41,7 +41,7 @@ export const CatalogsSelect: FC = memo(() => {
       onDropdownOpen={() => setIsOpen(true)}
       onDropdownClose={() => setIsOpen(false)}
       styles={{
-        dropdown: { borderRadius: '8px' },
+        dropdown: { borderRadius: '8px', zIndex: 30 },
         input: { '&:hover:not(:disabled)': { border: '1px solid #5E96FC' } },
         rightSection: { pointerEvents: 'none', paddingRight: '12px' },
         item: {

@@ -1,25 +1,18 @@
 import { memo } from 'react'
 
 import { Button } from '@mantine/core'
-import { useRouter } from 'next/router'
 import { useTranslation } from 'next-i18next'
 
 import { ClearIcon } from '@/components/svg/clearIcon'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
-import { selectClearParams, useParamsStore } from '@/stores/useParamsStore'
+import { useClearParams } from '@/hooks/useClearParams'
 
 export const ClearFiltersButton = memo(() => {
   const { t } = useTranslation('filters')
-  const { pathname, replace } = useRouter()
-  const clearParams = useParamsStore(selectClearParams)
+  const clearParams = useClearParams()
   const { data: vacancies } = useGetAllVacancies()
 
-  const onButtonClick = async (): Promise<void> => {
-    await clearParams()
-    await replace({ pathname }, undefined, { shallow: true })
-  }
-
-  const resetAllButtonTitle = t('resetAllButtonTitle', 'Сбросить все')
+  const resetAllButtonTitle = t('resetAllButtonTitle')
 
   return (
     <Button
@@ -28,7 +21,7 @@ export const ClearFiltersButton = memo(() => {
       compact
       className="group p-0 text-sub-title text-gray-500 transition hover:text-blue-400 active:text-blue-main-500 disabled:bg-transparent"
       rightIcon={<ClearIcon />}
-      onClick={onButtonClick}
+      onClick={clearParams}
       disabled={!vacancies}
     >
       {resetAllButtonTitle}
