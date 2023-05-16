@@ -49,7 +49,7 @@ export const Vacancies: FC = () => {
           {data && <FiltersPagination />}
         </MainContainer>
       </div>
-      {data && <MobileFiltersButtons isOpen={isOpenFilters} setOpen={setIsOpenFilters} />}
+      <MobileFiltersButtons isOpen={isOpenFilters} setOpen={setIsOpenFilters} />
     </>
   )
 }

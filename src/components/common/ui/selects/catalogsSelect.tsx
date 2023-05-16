@@ -4,7 +4,7 @@ import { Select } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
 
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
-import { MAX_WIDTH_FOR_FULL_TITLE, MIN_WIDTH_FOR_FULL_TITLE } from '@/constatnts/constants'
+import { LAPTOP_WIDTH, MIN_WIDTH_FOR_FULL_TITLE } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
 import { useWindowSize } from '@/hooks/useWindowSize'
@@ -21,7 +21,7 @@ export const CatalogsSelect: FC = memo(() => {
 
   const [catalogues = null, setCatalogues] = useParamsStore(selectCatalogues)
   const checkWidth = (): boolean => {
-    return width < MIN_WIDTH_FOR_FULL_TITLE || width > MAX_WIDTH_FOR_FULL_TITLE
+    return width < MIN_WIDTH_FOR_FULL_TITLE || width > LAPTOP_WIDTH
   }
   const chooseIndustryPlaceholder = t('chooseIndustryPlaceholder')
 
@@ -37,7 +37,6 @@ export const CatalogsSelect: FC = memo(() => {
       rightSectionWidth={36}
       radius="md"
       size="md"
-      searchable
       onDropdownOpen={() => setIsOpen(true)}
       onDropdownClose={() => setIsOpen(false)}
       styles={{

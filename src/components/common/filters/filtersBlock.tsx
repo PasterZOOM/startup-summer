@@ -8,7 +8,7 @@ import { ClearFiltersButton } from '@/components/common/ui/buttons/clearFiltersB
 import { MainButton } from '@/components/common/ui/buttons/mainButton'
 import { CatalogsSelect } from '@/components/common/ui/selects/catalogsSelect'
 import { Paper } from '@/components/common/ui/wrappers/paper'
-import { MAX_WIDTH_FOR_FULL_TITLE } from '@/constatnts/constants'
+import { LAPTOP_WIDTH } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useApplyFilters } from '@/hooks/useApplyFilters'
 import { useLoadingParametersFromQuery } from '@/hooks/useLoadingParametersFromQuery'
@@ -31,7 +31,7 @@ export const FiltersBlock = memo(() => {
 
   return (
     <Paper className="m-auto select-none space-y-8 p-4 lg:w-78.75">
-      {width > MAX_WIDTH_FOR_FULL_TITLE && (
+      {width > LAPTOP_WIDTH && (
         <div className="flex items-center justify-between">
           <span className="text-title-s font-bold">{filtersTitle}</span>
           <ClearFiltersButton />

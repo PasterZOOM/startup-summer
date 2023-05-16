@@ -1,6 +1,6 @@
 import { Dispatch, FC, ReactNode, SetStateAction, useEffect } from 'react'
 
-import { MAX_WIDTH_FOR_FULL_TITLE } from '@/constatnts/constants'
+import { LAPTOP_WIDTH } from '@/constatnts/constants'
 import { useWindowSize } from '@/hooks/useWindowSize'
 
 type PropsType = {
@@ -17,7 +17,7 @@ export const SidebarWrapper: FC<PropsType> = ({ children, setIsOpenFilters, isOp
   }
 
   useEffect(() => {
-    if (width > MAX_WIDTH_FOR_FULL_TITLE) {
+    if (width > LAPTOP_WIDTH) {
       closeFilters()
     }
   }, [width])
@@ -35,14 +35,12 @@ export const SidebarWrapper: FC<PropsType> = ({ children, setIsOpenFilters, isOp
   return (
     <>
       <div
-        className={`inset-0 z-10 bg-black bg-opacity-30 transition-all duration-300 ${
-          isOpenFilters ? 'fixed' : 'hidden'
-        }`}
+        className={`inset-0 z-10 bg-black bg-opacity-30 ${isOpenFilters ? 'fixed' : 'hidden'}`}
         onClick={closeFilters}
         aria-hidden
       />
       <aside
-        className={`fixed left-0 right-0 z-20 max-w-full transition-all duration-300 lg:static lg:z-auto lg:max-w-193.25 ${
+        className={`fixed left-0 right-0 z-20 max-w-full transition-all lg:static lg:z-auto lg:max-w-193.25 ${
           isOpenFilters ? 'bottom-16 md:bottom-20' : '-bottom-full'
         }`}
       >
