@@ -13,6 +13,12 @@ export const useGetVacancy = (id: string): UseQueryResult<VacancyType, AuthError
     queryKey: [QUERY_KEY.GET_VACANCY, id],
     queryFn: () => vacanciesAPI.getVacancy(id),
     enabled: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
+    refetchIntervalInBackground: false,
+    refetchInterval: false,
     onError: data => {
       handleAuthError(data)
     },
