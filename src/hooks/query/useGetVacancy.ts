@@ -15,6 +15,7 @@ export const useGetVacancy = (id: string): UseQueryResult<VacancyType, AuthError
     enabled: false,
     staleTime: Infinity,
     cacheTime: Infinity,
+    refetchOnMount: false,
     refetchOnReconnect: false,
     refetchIntervalInBackground: false,
     refetchInterval: false,
