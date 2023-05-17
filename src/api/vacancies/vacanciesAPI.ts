@@ -10,16 +10,14 @@ export const vacanciesAPI = {
   getVacancies: (params?: GetVacanciesParamsType) => {
     let temp: GetVacanciesParamsType = { ...params }
 
-    const checkPayment = (): boolean => {
-      return !!temp.payment_from || !!temp.payment_to
-    }
-
-    if (checkPayment()) {
+    if (!!temp.payment_from || !!temp.payment_to) {
       temp = { ...temp, no_agreement: '1' }
     }
 
     if (temp.page) {
-      temp = { ...temp, page: (+temp.page - 1).toString() }
+      const page = (+temp.page - 1).toString()
+
+      temp = { ...temp, page }
     }
     const headers: RawAxiosRequestHeaders | AxiosHeaders = {}
 

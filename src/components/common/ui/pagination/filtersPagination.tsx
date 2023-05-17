@@ -21,7 +21,7 @@ export const FiltersPagination: FC = memo(() => {
 
     setPage(paramsValue)
     await replace(
-      { pathname, query: { ...query, page: paramsValue === '0' ? [] : paramsValue } },
+      { pathname, query: { ...query, page: value <= 1 ? [] : paramsValue } },
       undefined,
       {
         shallow: true,

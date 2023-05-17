@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react'
+import { FC } from 'react'
 
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/router'
@@ -15,13 +15,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const Vacancy: FC = () => {
   const { query, isFallback } = useRouter()
 
-  const { data: vacancy, refetch, isLoading, error } = useGetVacancy(query.id as string)
-
-  useEffect(() => {
-    if (query.id) {
-      refetch().then()
-    }
-  }, [query.id])
+  const { data: vacancy, isLoading, error } = useGetVacancy(query.id as string)
 
   if (isLoading || isFallback) return <CustomLoader />
   if (error) return <NotFound />
