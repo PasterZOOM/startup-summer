@@ -1,4 +1,4 @@
-import { GetStaticProps } from 'next'
+import { GetServerSideProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Vacancy } from '@/components/pages/vacancy'
@@ -11,7 +11,7 @@ const VacancyPage: NextPageWithLayout = () => <Vacancy />
 VacancyPage.getLayout = MainLayout
 export default VacancyPage
 
-export const getStaticProps: GetStaticProps = async ({ locale = DEFAULT_LOCALE }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale = DEFAULT_LOCALE }) => {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
