@@ -34,7 +34,7 @@ const Header: FC = () => {
     <>
       <div
         className={`${isVisible ? 'top-0' : '-top-21'} ${
-          opened ? 'z-50' : 'z-50 transform duration-300'
+          opened ? 'z-50' : 'z-30 transform duration-300'
         } sticky bg-white px-3 py-6 lg:px-10`}
       >
         <div className="mx-auto flex max-w-279 items-center justify-between">
@@ -54,9 +54,9 @@ const Header: FC = () => {
         </div>
       </div>
       {/* Mobile navbar */}
-      <SubWrapper opened={opened} closeSidebar={close} bias={opened ? 'top-20 ' : '-top-20'}>
+      <SubWrapper opened={opened} closeSidebar={close} bias={opened ? 'top-4 ' : '-top-36'}>
         <Navbar
-          className="flex flex-col items-center gap-4 bg-white p-4 lg:hidden"
+          className="flex flex-col items-center gap-4 bg-white p-4 pt-16 lg:hidden"
           onClickLinkCallBack={close}
         />
       </SubWrapper>

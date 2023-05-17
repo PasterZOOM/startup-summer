@@ -36,11 +36,11 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
 
   useEffect(() => {
     if (width > TABLET_WIDTH) {
-      const sidebarHeightTablet = 90
+      const sidebarHeightTablet = 45
 
       setBodyHeight(document.body.clientHeight + sidebarHeightTablet)
     } else {
-      const sidebarHeightMobile = 74
+      const sidebarHeightMobile = 37
 
       setBodyHeight(document.body.clientHeight + sidebarHeightMobile)
     }
@@ -48,9 +48,9 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
 
   return (
     <div
-      className={`bottom-0 left-0 right-0 z-30 flex w-full gap-3 bg-white p-4 md:p-6 lg:hidden ${
+      className={`bottom-0 left-0 right-0 flex w-full gap-3 bg-white p-4 md:p-6 lg:hidden ${
         height > bodyHeight ? 'fixed' : 'sticky'
-      } ${isOpen ? 'z-50' : ''}`}
+      } ${isOpen ? 'z-50' : 'z-30'}`}
     >
       {isOpen ? (
         <>

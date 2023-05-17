@@ -22,7 +22,7 @@ export const Vacancies: FC = () => {
   return (
     <>
       <div
-        className={`${inter.className} flex justify-center p-2 pb-0 md:p-10 md:pb-0 lg:gap-7 lg:pb-0`}
+        className={`${inter.className} flex justify-center p-2 pb-2 md:p-10 md:pb-5 lg:gap-7 lg:pb-10`}
       >
         <SubWrapper
           opened={opened}
@@ -31,7 +31,7 @@ export const Vacancies: FC = () => {
         >
           <FiltersBlock />
         </SubWrapper>
-        <MainContainer className="m-auto flex flex-col space-y-2 md:space-y-5 lg:m-0 lg:space-y-10">
+        <MainContainer className="m-auto flex flex-col space-y-2 md:space-y-5 lg:m-0 lg:space-y-10 ">
           <div className="space-y-2 md:space-y-4">
             <SearchInput />
             <VacanciesBlock />

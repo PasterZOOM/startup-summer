@@ -32,7 +32,9 @@ export const SubWrapper: FC<PropsType> = ({ children, closeSidebar, opened, bias
   return (
     <>
       <div
-        className={`inset-0 bg-black bg-opacity-30 transition-all ${opened ? 'fixed z-40' : ''}`}
+        className={`inset-0 bg-black bg-opacity-30 transition-all lg:hidden ${
+          opened ? 'fixed z-40' : ''
+        }`}
         onClick={closeSidebar}
         aria-hidden
       />
