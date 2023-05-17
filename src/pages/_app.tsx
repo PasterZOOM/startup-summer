@@ -1,7 +1,6 @@
 import '@/styles/globals.css'
 import { ReactElement, useState } from 'react'
 
-import { MantineProvider } from '@mantine/core'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
@@ -52,19 +51,11 @@ const App = ({ Component, pageProps }: AppPropsWithLayout): JSX.Element => {
         <meta name="description" content="Startup Summer Test" key="description" />
       </Head>
 
-      <MantineProvider
-        withGlobalStyles
-        withNormalizeCSS
-        theme={{
-          colorScheme: 'light',
-        }}
-      >
-        <QueryClientProvider client={queryClient}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <Component {...pageProps} />
-          </Hydrate>
-        </QueryClientProvider>
-      </MantineProvider>
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Component {...pageProps} />
+        </Hydrate>
+      </QueryClientProvider>
     </>
   )
 }

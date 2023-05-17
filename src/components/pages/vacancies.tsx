@@ -1,55 +1,46 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 
+import { useDisclosure } from '@mantine/hooks'
 import { Inter } from 'next/font/google'
-import { useRouter } from 'next/router'
 
 import { FiltersBlock } from '@/components/common/filters/filtersBlock'
 import { MobileFiltersButtons } from '@/components/common/ui/buttons/mobilefiltersButtons'
-import { CustomLoader } from '@/components/common/ui/customLoader'
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { FiltersPagination } from '@/components/common/ui/pagination/filtersPagination'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
-import { VacancyCard } from '@/components/common/vacancy/vacancyCard'
-import { SidebarWrapper } from '@/components/common/wrappers/sidebarWrapper'
+import { VacanciesBlock } from '@/components/common/vacancy/vacanciesBlock'
+import { SubWrapper } from '@/components/common/wrappers/subWrapper'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const Vacancies: FC = () => {
-  const { push } = useRouter()
+  const [opened, { open, close }] = useDisclosure(false)
 
   const { data } = useGetAllVacancies()
-
-  const [isOpenFilters, setIsOpenFilters] = useState(false)
-
-  useEffect(() => {
-    if (data && !data.objects.length) {
-      push('404').then()
-    }
-  }, [data])
 
   return (
     <>
       <div
-        className={`${inter.className} flex flex-col justify-center gap-2 px-2 pt-2 md:gap-4 md:px-10 md:pt-10 lg:flex-row lg:gap-7 lg:p-10`}
+        className={`${inter.className} flex justify-center p-2 pb-0 md:p-10 md:pb-0 lg:gap-7 lg:pb-0`}
       >
-        <SidebarWrapper isOpenFilters={isOpenFilters} setIsOpenFilters={setIsOpenFilters}>
+        <SubWrapper
+          opened={opened}
+          closeSidebar={close}
+          bias={opened ? 'bottom-16 md:bottom-20' : '-bottom-full'}
+        >
           <FiltersBlock />
-        </SidebarWrapper>
-        <MainContainer className="m-auto mb-2 space-y-2 md:mb-5 md:space-y-5 lg:m-0 lg:space-y-10">
+        </SubWrapper>
+        <MainContainer className="m-auto flex flex-col space-y-2 md:space-y-5 lg:m-0 lg:space-y-10">
           <div className="space-y-2 md:space-y-4">
             <SearchInput />
-            {data ? (
-              data.objects.map(vacancy => <VacancyCard key={vacancy.id} vacancy={vacancy} />)
-            ) : (
-              <CustomLoader />
-            )}
+            <VacanciesBlock />
           </div>
 
           {data && <FiltersPagination />}
         </MainContainer>
       </div>
-      <MobileFiltersButtons isOpen={isOpenFilters} setOpen={setIsOpenFilters} />
+      <MobileFiltersButtons isOpen={opened} setOpen={open} />
     </>
   )
 }

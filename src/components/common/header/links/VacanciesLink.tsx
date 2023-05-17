@@ -7,7 +7,10 @@ import { ROUT_PATHS } from '@/enums/paths'
 import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
 import { getQueryParamsFromParams } from '@/utils/getQueryParamsFromParams'
 
-export const VacanciesLink: FC = () => {
+type PropsType = {
+  onClickCallBack?: () => void
+}
+export const VacanciesLink: FC<PropsType> = ({ onClickCallBack }) => {
   const { t } = useTranslation('common')
 
   const vacanciesTitle = t('vacanciesTitle')
@@ -16,6 +19,7 @@ export const VacanciesLink: FC = () => {
   return (
     <HeaderLinks
       href={{ pathname: ROUT_PATHS.VACANCIES, query: { ...getQueryParamsFromParams(params) } }}
+      onClickCallBack={onClickCallBack}
     >
       {vacanciesTitle}
     </HeaderLinks>

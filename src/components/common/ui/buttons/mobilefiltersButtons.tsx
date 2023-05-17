@@ -1,4 +1,4 @@
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import { useTranslation } from 'next-i18next'
 
@@ -10,7 +10,7 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 
 interface FilterButtonsProps {
   isOpen: boolean
-  setOpen: Dispatch<SetStateAction<boolean>>
+  setOpen: () => void
 }
 
 export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }) => {
@@ -25,12 +25,12 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
   const filtersTitle = t('filtersTitle')
 
   const onClickApplyButton = (): void => {
-    setOpen(false)
+    setOpen()
     applyFilters()
   }
 
   const onClickResetButton = (): void => {
-    setOpen(false)
+    setOpen()
     clearParams()
   }
 
@@ -48,9 +48,9 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
 
   return (
     <div
-      className={`bottom-0 left-0 right-0 z-50 flex w-full gap-3 bg-white p-4 md:p-6 lg:hidden ${
+      className={`bottom-0 left-0 right-0 z-30 flex w-full gap-3 bg-white p-4 md:p-6 lg:hidden ${
         height > bodyHeight ? 'fixed' : 'sticky'
-      }`}
+      } ${isOpen ? 'z-50' : ''}`}
     >
       {isOpen ? (
         <>
@@ -66,7 +66,7 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
           className="w-full"
           size="md"
           onClick={() => {
-            setOpen(true)
+            setOpen()
           }}
         >
           {filtersTitle}

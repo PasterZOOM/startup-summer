@@ -1,8 +1,5 @@
 import { useEffect, useState } from 'react'
 
-export const TABLET_WIDTH = 768
-export const VERTICAL_MOBILE = 640
-
 export const useWindowSize = (): Size => {
   const [windowSize, setWindowSize] = useState<Size>({
     width: 0,

@@ -2,7 +2,8 @@ import { memo } from 'react'
 
 import { Pagination } from '@mantine/core'
 
-import { TABLET_WIDTH, useWindowSize } from '@/hooks/useWindowSize'
+import { TABLET_WIDTH } from '@/constatnts/constants'
+import { useWindowSize } from '@/hooks/useWindowSize'
 
 type PropsType = {
   page: number
