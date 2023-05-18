@@ -15,10 +15,13 @@ export const useApplyFilters = (): (() => void) => {
 
   const applyFilters = async (): Promise<void> => {
     const queryParams = getQueryParamsFromParams(params)
+    const paramsString = JSON.stringify(params)
 
-    await replace({ pathname, query: { ...queryParams, page: [] } }, undefined, {
-      shallow: true,
-    })
+    if (paramsString !== '{}') {
+      await replace({ pathname, query: { ...queryParams, page: [] } }, undefined, {
+        shallow: true,
+      })
+    }
   }
 
   useEffect(() => {

@@ -6,11 +6,9 @@ import { selectParamsState, useParamsStore } from '@/stores/useParamsStore'
 
 export const useLoadingParametersFromQuery = (): void => {
   const { query } = useRouter()
-  const [params, setParams] = useParamsStore(selectParamsState)
+  const [, setParams] = useParamsStore(selectParamsState)
 
   useEffect(() => {
-    if (JSON.stringify(params) !== JSON.stringify(query)) {
-      setParams(query)
-    }
+    setParams(query)
   }, [query])
 }

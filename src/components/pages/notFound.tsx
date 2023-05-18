@@ -28,7 +28,7 @@ export const NotFound: FC = () => {
   const notFoundButtonTitle = t('notFoundButtonTitle')
 
   useEffect(() => {
-    clearParams()
+    clearParams({})
   }, [])
 
   return (
