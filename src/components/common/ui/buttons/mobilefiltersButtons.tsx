@@ -11,9 +11,10 @@ import { useWindowSize } from '@/hooks/useWindowSize'
 interface FilterButtonsProps {
   isOpen: boolean
   setOpen: () => void
+  setClose: () => void
 }
 
-export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }) => {
+export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen, setClose }) => {
   const { height, width } = useWindowSize()
   const { t } = useTranslation('filters')
   const clearParams = useClearParams()
@@ -25,12 +26,12 @@ export const MobileFiltersButtons: FC<FilterButtonsProps> = ({ isOpen, setOpen }
   const filtersTitle = t('filtersTitle')
 
   const onClickApplyButton = (): void => {
-    setOpen()
+    setClose()
     applyFilters()
   }
 
   const onClickResetButton = (): void => {
-    setOpen()
+    setClose()
     clearParams()
   }
 

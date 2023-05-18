@@ -25,7 +25,7 @@ const initialState: StateType = {
   no_agreement: undefined,
 }
 
-export const useParamsStore = create<StoreType>(set => ({
+export const useParamsStore = create<StoreType>((set, get) => ({
   ...initialState,
   setQueryParams: params => {
     if (JSON.stringify(params) === '{}') {
@@ -34,7 +34,7 @@ export const useParamsStore = create<StoreType>(set => ({
       set({ ...initialState, ...params })
     }
   },
-  clearQueryParams: () => set(initialState),
+  clearQueryParams: page => set({ ...initialState, page, keyword: get().keyword }),
   setKeyword: keyword => set({ keyword }),
   setPaymentFrom: payment_from => set({ payment_from }),
   setPaymentTo: payment_to => set({ payment_to }),
@@ -68,4 +68,4 @@ type SetFunctionType<T = string | undefined> = (value: T) => void
 type StateSelectorType<T = string | undefined> = (store: StoreType) => [T, SetFunctionType<T>]
 
 type SetQueryParamsFnType = (params: GetVacanciesParamsType) => void
-type ClearQueryParamsFnType = () => void
+type ClearQueryParamsFnType = (page?: string) => void
