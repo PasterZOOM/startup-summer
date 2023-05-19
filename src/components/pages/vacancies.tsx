@@ -22,7 +22,7 @@ export const Vacancies: FC = () => {
   return (
     <>
       <div
-        className={`${inter.className} flex justify-center p-2 pb-2 md:p-10 md:pb-5 lg:gap-7 lg:pb-10`}
+        className={`${inter.className} flex justify-center p-2 pb-20.5 md:p-10 md:pb-32.5 lg:gap-7 lg:pb-10`}
       >
         <SubWrapper
           opened={opened}
