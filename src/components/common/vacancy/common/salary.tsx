@@ -8,10 +8,20 @@ type PropsType = {
 }
 
 export const Salary: FC<PropsType> = ({ from, to, currency, className }) => {
-  return (
-    <div className={className}>
-      з/п {!from && !to && 'по договоренности'} {!to && !!from && 'от'} {!!from && from}{' '}
-      {!!from && !!to && '-'} {!!to && to} {(!!from || !!to) && currency}
-    </div>
-  )
+  let text = `${from} - ${to} ${currency}`
+
+  if (!to && from) {
+    text = `от ${from} ${currency}`
+  }
+  if (to && !from) {
+    text = `до ${to} ${currency}`
+  }
+  if (from && to && to === from) {
+    text = `${to} ${currency}`
+  }
+  if (!from && !to) {
+    text = 'по договоренности'
+  }
+
+  return <div className={className}>з/п {text}</div>
 }
