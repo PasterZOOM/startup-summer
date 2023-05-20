@@ -8,8 +8,8 @@ import { MobileFiltersButtons } from '@/components/common/ui/buttons/mobilefilte
 import { SearchInput } from '@/components/common/ui/inputs/searchInput'
 import { FiltersPagination } from '@/components/common/ui/pagination/filtersPagination'
 import { MainContainer } from '@/components/common/ui/wrappers/mainContainer'
+import { SubWrapper } from '@/components/common/ui/wrappers/subWrapper'
 import { VacanciesBlock } from '@/components/common/vacancy/vacanciesBlock'
-import { SubWrapper } from '@/components/common/wrappers/subWrapper'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 
 const inter = Inter({ subsets: ['latin'] })

@@ -4,12 +4,15 @@ import { Select } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
 
 import { SelectArrayIcon } from '@/components/svg/selectArrayIcon'
+import { LAPTOP_WIDTH } from '@/constatnts/constants'
 import { useGetAllVacancies } from '@/hooks/query/useGetAllVacancies'
 import { useGetCatalogs } from '@/hooks/query/useGetCatalogs'
+import { useWindowSize } from '@/hooks/useWindowSize'
 import { selectCatalogues, useParamsStore } from '@/stores/useParamsStore'
 
 export const CatalogsSelect: FC = memo(() => {
   const { t } = useTranslation('filters')
+  const { width } = useWindowSize()
 
   const [isOpen, setIsOpen] = useState(false)
 
@@ -52,6 +55,7 @@ export const CatalogsSelect: FC = memo(() => {
       value={catalogues}
       onChange={value => setCatalogues(value ?? undefined)}
       disabled={!vacancies}
+      dropdownPosition={width < LAPTOP_WIDTH ? 'top' : undefined}
     />
   )
 })

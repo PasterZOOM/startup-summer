@@ -44,7 +44,7 @@ export const SubWrapper: FC<PropsType> = ({ children, closeSidebar, opened, bias
         } ${bias}`}
         ref={node =>
           node &&
-          (opened || width > LAPTOP_WIDTH
+          (opened || width >= LAPTOP_WIDTH
             ? node.removeAttribute('inert')
             : node.setAttribute('inert', ''))
         }

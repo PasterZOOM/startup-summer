@@ -5,7 +5,7 @@ import { useDisclosure } from '@mantine/hooks'
 import Link from 'next/link'
 
 import { Navbar } from '@/components/common/header/navbar'
-import { SubWrapper } from '@/components/common/wrappers/subWrapper'
+import { SubWrapper } from '@/components/common/ui/wrappers/subWrapper'
 import { LogoSvg } from '@/components/svg/logoSvg'
 import { ROUT_PATHS } from '@/enums/paths'
 
