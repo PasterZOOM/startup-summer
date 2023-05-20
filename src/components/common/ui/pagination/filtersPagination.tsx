@@ -20,13 +20,15 @@ export const FiltersPagination: FC = memo(() => {
     const paramsValue = value.toString()
 
     setPage(paramsValue)
-    await replace(
-      { pathname, query: { ...query, page: value <= 1 ? [] : paramsValue } },
-      undefined,
-      {
-        shallow: true,
-      }
-    )
+    if (paramsValue !== page && !(paramsValue === '1' && page === undefined)) {
+      await replace(
+        { pathname, query: { ...query, page: value <= 1 ? [] : paramsValue } },
+        undefined,
+        {
+          shallow: true,
+        }
+      )
+    }
   }
 
   const total = countTotalPages(
@@ -37,7 +39,7 @@ export const FiltersPagination: FC = memo(() => {
   if (total <= DEFAULT_PAGE_COUNT) return null
 
   return (
-    <div className="mx-auto w-fit ">
+    <div className="mx-auto w-fit">
       <MainPagination page={+(page ?? 1)} total={total} onChange={onPaginationChange} />
     </div>
   )
