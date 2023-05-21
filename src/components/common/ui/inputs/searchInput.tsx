@@ -29,7 +29,7 @@ export const SearchInput: FC = memo(() => {
 
   const clearSearch = async (): Promise<void> => {
     if (query.keyword) {
-      await replace({ query: { ...query, keyword: [] } }, undefined, {
+      await replace({ query: { ...query, keyword: [], page: [] } }, undefined, {
         shallow: true,
       })
     } else {
