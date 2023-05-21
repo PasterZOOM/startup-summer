@@ -23,9 +23,8 @@ export const useFavoriteVacanciesStore = create(
         const { vacancies } = get()
 
         delete vacancies[id]
-        const temp = { ...vacancies }
 
-        set({ vacancies: temp })
+        set({ vacancies })
       },
     }),
     { name: 'favorite' }
