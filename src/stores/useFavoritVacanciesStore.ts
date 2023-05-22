@@ -22,9 +22,11 @@ export const useFavoriteVacanciesStore = create(
       removeVacancy: id => {
         const { vacancies } = get()
 
-        delete vacancies[id]
+        const temp = { ...vacancies }
 
-        set({ vacancies })
+        delete temp[id]
+
+        set({ vacancies: temp })
       },
     }),
     { name: 'favorite' }
