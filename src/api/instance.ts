@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { AuthResponseType } from '@/api/auth/types'
+import { AuthStateType } from '@/stores/useAuthStore'
 
 const baseConfig = {
   baseURL: process.env.NEXT_PUBLIC_BASE_URL,
@@ -20,10 +20,13 @@ instanceWithAuth.interceptors.request.use(async req => {
     const authData = localStorage.getItem('auth')
 
     if (authData) {
-      const { access_token: accessToken, token_type: tokenType }: AuthResponseType =
-        JSON.parse(authData).state
+      const {
+        auth: { access_token, token_type },
+      }: AuthStateType = JSON.parse(authData).state
 
-      request.headers.Authorization = `${tokenType} ${accessToken}`
+      if (access_token && token_type) {
+        request.headers.Authorization = `${token_type} ${access_token}`
+      }
     }
   }
 
