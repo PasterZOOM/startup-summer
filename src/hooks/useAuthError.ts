@@ -1,12 +1,12 @@
 import { AuthErrorType } from '@/api/auth/types'
-import { selectClearTokenData, useUserSettings } from '@/stores/useAuthStore'
+import { useRefreshToken } from '@/hooks/query/useRefreshToken'
 
 export const useAuthError = (): ((data: AuthErrorType) => void) => {
-  const clearTokensData = useUserSettings(selectClearTokenData)
+  const { refetch } = useRefreshToken()
 
-  return (data: AuthErrorType) => {
+  return async (data: AuthErrorType) => {
     if (data.error.error === 'invalid_token') {
-      clearTokensData()
+      await refetch()
     }
   }
 }
