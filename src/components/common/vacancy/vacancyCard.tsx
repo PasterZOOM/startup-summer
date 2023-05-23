@@ -1,6 +1,6 @@
 import { memo } from 'react'
 
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import { VacancyType } from '@/api/vacancies/types'
 import { FavoriteStare } from '@/components/common/ui/checkboxes/favoriteStare'
@@ -14,14 +14,11 @@ type PropsType = {
   vacancy: VacancyType
 }
 export const VacancyCard = memo(({ vacancy }: PropsType) => {
-  const { push } = useRouter()
-
   return (
-    <button
-      type="button"
+    <Link
       data-elem={`vacancy-${vacancy.id}`}
-      onClick={() => push(`${ROUT_PATHS.VACANCIES}/${vacancy.id}`)}
-      className="w-full rounded-xl text-left focus:outline-offset-4 focus:outline-blue-main-500"
+      href={`${ROUT_PATHS.VACANCIES}/${vacancy.id}`}
+      className="block rounded-xl focus:outline-offset-4 focus:outline-blue-main-500"
     >
       <Paper className="p-4 transition hover:bg-gray-50 hover:shadow-black md:p-6">
         <div className="space-y-3">
@@ -44,6 +41,6 @@ export const VacancyCard = memo(({ vacancy }: PropsType) => {
           <Location className="text-title-base-mb">{vacancy.town.title}</Location>
         </div>
       </Paper>
-    </button>
+    </Link>
   )
 })
