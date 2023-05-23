@@ -45,8 +45,8 @@ export const InputNumber = memo((props: NumberInputProps) => {
         handlersRef={handlers}
         step={PAYMENT_STEP}
         disabled={!vacancies}
-        {...props}
         sx={{ '&:hover': { 'input:not(:disabled)': { border: '1px solid #5E96FC' } } }}
+        {...props}
       />
     </div>
   )

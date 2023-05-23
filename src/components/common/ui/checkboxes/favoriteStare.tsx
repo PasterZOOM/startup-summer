@@ -28,7 +28,7 @@ export const FavoriteStare: FC<PropsType> = ({ vacancy }) => {
       } else {
         addVacancy(vacancy)
       }
-      e.stopPropagation()
+      e.preventDefault()
     }
   }
 
